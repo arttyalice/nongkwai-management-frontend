@@ -1,0 +1,87 @@
+<template>
+    <el-container style="height: 100vh;">
+        <el-aside :width="isCollapse ? '' : ''" style="background-color: rgb(238, 241, 246)">
+            <el-menu default-active="2" class="el-menu-vertical" :collapse="isCollapse">
+                <router-link to="/">
+                    <el-menu-item index="2">
+                    <i class="tiny material-icons">home</i>
+                    <span slot="title">หน้าหลัก</span>
+                    </el-menu-item>
+                </router-link>
+                <router-link to="/user">
+                    <el-menu-item index="2">
+                    <i class="tiny material-icons">people</i>
+                    <span slot="title">จัดการผู้ใช้งานระบบ</span>
+                    </el-menu-item>
+                </router-link>
+                <router-link to="/person">
+                    <el-menu-item index="2">
+                    <i class="tiny material-icons">person</i>
+                    <span slot="title">จัดการคน</span>
+                    </el-menu-item>
+                </router-link>
+                <router-link to="/aid">
+                    <el-menu-item index="2">
+                    <i class="tiny material-icons">airline_seat_flat</i>
+                    <span slot="title">ผู้ป่วยโรคเอดส์</span>
+                    </el-menu-item>
+                </router-link>
+                <router-link to="/disabled">
+                    <el-menu-item index="2">
+                    <i class="tiny material-icons">accessible</i>
+                    <span slot="title">ผู้พิการ</span>
+                    </el-menu-item>
+                </router-link>
+                <router-link to="/elder">
+                    <el-menu-item index="2">
+                    <i class="tiny material-icons">wc</i>
+                    <span slot="title">ผู้สูงอายุ</span>
+                    </el-menu-item>
+                </router-link>
+            </el-menu>
+        </el-aside>
+
+        <el-container>
+            <el-header class="employee" style="font-size: 18px">
+                <el-row>
+                    <el-col :span="12" style="text-align: left;">
+                    <el-button className="menu-button" @click="isCollapse = !isCollapse" icon="el-icon-more" circle>
+                    </el-button>
+                    </el-col>
+                    <el-col :span="12" style="text-align: right;"><span @click="userLogout">{{ user.username }}</span></el-col>
+                </el-row>
+            </el-header>
+            
+            <el-main>
+                <slot></slot>
+            </el-main>
+        </el-container>
+    </el-container>
+</template>
+
+<script>
+  export default {
+    props: ['user'],
+    data() {
+      return {
+        isCollapse: false,
+      };
+    },
+    methods: {
+      userLogout() {
+        localStorage.removeItem('admin_user_data');
+        this.$emit('logOutSuccess');
+      },
+    },
+  };
+</script>
+
+<style lang="scss">
+  @import '@/assets/scss/color.scss';
+
+  .el-header {
+    &.employee {
+      background-color: $primaryEmployee!important;
+    }
+  }
+</style>
