@@ -28,12 +28,12 @@
         <el-table-column
           prop="id_card"
           label="เลขบัตรประชาชน"
-          width="200"
+          width="130"
         >
         </el-table-column>
         <el-table-column
           label="ชื่อ-นามสกุล"
-          width="200"
+          width="180"
         >
           <template slot-scope="item">
             {{ `${item.row.person_titlename} ${item.row.person_firstname} ${item.row.person_lastname}` }}
@@ -42,11 +42,11 @@
         <el-table-column
           prop="person_phone"
           label="เบอร์โทรศัพท์"
-          width="200"
+          width="110"
         >
         </el-table-column>
         <el-table-column
-          label="person_birthday"
+          label="วันเกิด"
         >
           <template slot-scope="item">
             {{ momentDate(item.row.person_birthday) }}
@@ -65,7 +65,7 @@
                 </el-button>
               </el-col>
               <el-col :span="12">
-                <el-button type="warning" plain>
+                <el-button @click="showContactModal(item.row)" type="warning" plain>
                   ผู้ติดต่อ
                 </el-button>
               </el-col>
@@ -105,7 +105,8 @@
         >
         </el-pagination>
     </el-row>
-    <patientModal v-if="patientModal" @closeModal="patientModal = false" :dialogVisible="patientModal" :patientInfo="patientInfo" />
+    <patientModal v-if="isPatientModal" @closeModal="isPatientModal = false" :patientInfo="patientInfo" />
+    <contactModal v-if="isContactModal" @closeModal="isContactModal = false" :patientInfo="patientInfo" />
   </div>
 </template>
 
@@ -114,10 +115,12 @@
     import personService from '@/services/person';
     import aidService from '@/services/aid';
     import patientModal from '@/components/Aid/patientModal';
+    import contactModal from '@/components/Aid/contactModal';
 
     export default {
         components: {
             patientModal,
+            contactModal,
         },
         data() {
             return {
@@ -129,7 +132,8 @@
                         { id: 0, name: 'ผู้ดูแลระบบ' },
                         { id: 1, name: 'ผู้ใช้งานระบบ' },
                     ],
-                    patientModal: false,
+                    isPatientModal: false,
+                    isContactModal: false,
                     patientInfo: {},
             };
         },
@@ -149,9 +153,12 @@
                 this.aidsList = await aidService.getAllAids(this.currentPage, 10, this.searchtext);
             },
             showPatientModal (item) {
-                console.log(item)
                 this.patientInfo = item
-                this.patientModal = true
+                this.isPatientModal = true
+            },
+            showContactModal (item) {
+                this.patientInfo = item
+                this.isContactModal = true
             },
             async removePerson(row) {
                 this.$confirm(`โปรดตรวจสอบให้แน่ใจอีกครั้งการลบข้อมูลของ ${row.person_firstname} ${row.person_lastname} จะไม่สามารถกูคืนได้`,
