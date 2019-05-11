@@ -4,13 +4,6 @@
       <el-col :span="12" class="align-l">
         จัดการข้อมูลผู้ป่วยโรคเอดส์
       </el-col>
-      <el-col :span="12" class="align-r">
-          <router-link to="/aid/insert">
-            <el-button type="primary" plain @click="dialogVisible = true">
-                เพิ่มข้อมูลผู้ป่วย
-            </el-button>
-          </router-link>
-      </el-col>
     </el-row>
     <el-row>
       <el-col :span="12">

@@ -49,6 +49,11 @@
                     <el-form-item label="วันเกิด :" prop="birthDate">
                         <el-date-picker
                             style="width: 100%;"
+                            :default-time="(() => {
+                                let d = new Date()
+                                let year = d.getFullYear() + 543
+                                return `${year}-01-01` 
+                            })()"
                             v-model="person.birthDate"
                             type="date"
                             placeholder="เลือกวันเกิด">
@@ -62,9 +67,18 @@
                 </el-col>
             </el-row>
             <el-row>
-                <el-col :span="18">
+                <el-col :span="12">
                     <el-form-item label="เบอร์โทร :" prop="phone">
                         <el-input placeholder="0812345678" v-model="person.phone"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="ประเภท :" prop="type">
+                        <el-select style="width: 100%;" v-model="person.type" multiple placeholder="เลือกประเภท">
+                            <el-option label="ผู้ป่วยโรคเอดส์" :value="1"></el-option>
+                            <el-option label="ผู้พิการ" :value="2"></el-option>
+                            <el-option label="ผู้สูงอายุ" :value="3"></el-option>
+                        </el-select>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -246,6 +260,8 @@
                     fname: '',
                     lname: '',
                     phone: '',
+                    type: [],
+                    old_type: [],
                     birthDate: '',
                     nationality: '',
                     person_status: '',
@@ -276,6 +292,8 @@
                     fname: res.person_firstname,
                     lname: res.person_lastname,
                     phone: res.person_phone,
+                    type: res.person_type,
+                    old_type: res.person_type,
                     birthDate: res.person_birthday,
                     nationality: res.person_nationality,
                     person_status: res.person_status,
@@ -297,6 +315,7 @@
                 this.districtList = await addressService.getDistricByProvinceID(this.person.address.Pid);
                 this.subDistrictList = await addressService.getSubdistrictByDistrictID(this.person.address.Did);
             } catch (error) {
+                console.log(error)
                 this.$alert('มีบางอย่างผิดพลาด โปรดลองใหม่ในภายหลัง', 'บางอย่างผิดพลาด!', {
                     type: 'error',
                     confirmButtonText: 'ตกลง',
@@ -312,6 +331,8 @@
                     fname: '',
                     lname: '',
                     phone: '',
+                    type: [],
+                    old_type: [],
                     birthDate: '',
                     nationality: '',
                     person_status: '',
@@ -407,6 +428,8 @@
                 FormPerson.append('person_status', this.person.person_status);
                 FormPerson.append('person_lat', this.person.address.geo.lat);
                 FormPerson.append('person_lng', this.person.address.geo.lng);
+                FormPerson.append('person_type', JSON.stringify(this.person.type));
+                FormPerson.append('old_person_type', JSON.stringify(this.person.old_type));
                 FormPerson.append('user_id', localStorage.getItem('admin_user_data'));
                 try {
                     const res = await personService.updatePerson(FormPerson, this.person.idCard);

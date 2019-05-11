@@ -24,6 +24,12 @@ import Disabled from './views/Disabled/index.vue';
 import ManageDisabled from './views/Disabled/manage.vue';
 import InsertDisabled from './views/Disabled/insert.vue';
 import UpdateDisabled from './views/Disabled/update.vue';
+// Visiting Component
+import Visiting from './views/Visiting/index.vue';
+import ManageVisiting from './views/Visiting/manage.vue';
+import VisitingADLSummary from './views/Visiting/adl/summary/index';
+import InsertVisiting from './views/Visiting/insert.vue';
+import UpdateVisiting from './views/Visiting/update.vue';
 
 Vue.use(Router);
 
@@ -73,6 +79,16 @@ export default new Router({
         { path: '', component: ManageDisabled },
         { path: 'insert', component: InsertDisabled },
         { path: 'update/:pID', component: UpdateDisabled },
+      ]
+    },
+    {
+      path: '/visiting',
+      component: Visiting,
+      children: [
+        { path: '', component: ManageVisiting },
+        { path: 'adl/summary/:adlID', component: VisitingADLSummary },
+        { path: 'insert/:pID', component: InsertVisiting },
+        { path: 'update/:pID', component: UpdateVisiting },
       ]
     },
   ],

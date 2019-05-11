@@ -4,38 +4,44 @@
             <el-menu default-active="2" class="el-menu-vertical" :collapse="isCollapse">
                 <router-link to="/">
                     <el-menu-item index="2">
-                    <i class="tiny material-icons">home</i>
-                    <span slot="title">หน้าหลัก</span>
+                      <i class="tiny material-icons">home</i>
+                      <span slot="title">หน้าหลัก</span>
                     </el-menu-item>
                 </router-link>
                 <router-link to="/user">
                     <el-menu-item index="2">
-                    <i class="tiny material-icons">people</i>
-                    <span slot="title">จัดการผู้ใช้งานระบบ</span>
+                      <i class="tiny material-icons">people</i>
+                      <span slot="title">จัดการผู้ใช้งานระบบ</span>
                     </el-menu-item>
                 </router-link>
                 <router-link to="/person">
                     <el-menu-item index="2">
-                    <i class="tiny material-icons">person</i>
-                    <span slot="title">จัดการคน</span>
+                      <i class="tiny material-icons">person</i>
+                      <span slot="title">จัดการคน</span>
                     </el-menu-item>
                 </router-link>
                 <router-link to="/aid">
                     <el-menu-item index="2">
-                    <i class="tiny material-icons">airline_seat_flat</i>
-                    <span slot="title">ผู้ป่วยโรคเอดส์</span>
+                      <i class="tiny material-icons">airline_seat_flat</i>
+                      <span slot="title">ผู้ป่วยโรคเอดส์</span>
                     </el-menu-item>
                 </router-link>
                 <router-link to="/disabled">
                     <el-menu-item index="2">
-                    <i class="tiny material-icons">accessible</i>
-                    <span slot="title">ผู้พิการ</span>
+                      <i class="tiny material-icons">accessible</i>
+                      <span slot="title">ผู้พิการ</span>
                     </el-menu-item>
                 </router-link>
                 <router-link to="/elder">
                     <el-menu-item index="2">
-                    <i class="tiny material-icons">wc</i>
-                    <span slot="title">ผู้สูงอายุ</span>
+                      <i class="tiny material-icons">wc</i>
+                      <span slot="title">ผู้สูงอายุ</span>
+                    </el-menu-item>
+                </router-link>
+                <router-link to="/visiting">
+                    <el-menu-item index="2">
+                      <i class="tiny material-icons">location_on</i>
+                      <span slot="title">เยี่ยมบ้าน</span>
                     </el-menu-item>
                 </router-link>
             </el-menu>

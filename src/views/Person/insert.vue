@@ -50,6 +50,11 @@
                         <el-date-picker
                             style="width: 100%;"
                             v-model="person.birthDate"
+                            :default-value="(() => {
+                                let d = new Date()
+                                let year = d.getFullYear() + 543
+                                return new Date(`${year}-01-01`)
+                            })()"
                             type="date"
                             placeholder="เลือกวันเกิด">
                         </el-date-picker>
@@ -62,9 +67,18 @@
                 </el-col>
             </el-row>
             <el-row>
-                <el-col :span="18">
+                <el-col :span="12">
                     <el-form-item label="เบอร์โทร :" prop="phone">
                         <el-input placeholder="0812345678" v-model="person.phone"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="ประเภท :" prop="type">
+                        <el-select style="width: 100%;" v-model="person.type" multiple placeholder="เลือกประเภท">
+                            <el-option label="ผู้ป่วยโรคเอดส์" :value="1"></el-option>
+                            <el-option label="ผู้พิการ" :value="2"></el-option>
+                            <el-option label="ผู้สูงอายุ" :value="3"></el-option>
+                        </el-select>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -195,6 +209,9 @@
                         { required: true, message: 'กรุณากรอกเบอร์โทร', trigger: 'blur', },
                         { min: 9, max: 10, message: 'เบอร์โทรต้องยาว 9 - 10 หลัก', trigger: 'change' },
                     ],
+                    type: [
+                        { required: true, message: 'กรุราเลือกประเภท', trigger: 'blur', },
+                    ],
                     birthDate: [
                         { required: true, message: 'กรุณากรอกวันเกิด', trigger: 'blur', },
                     ],
@@ -244,6 +261,7 @@
                     fname: '',
                     lname: '',
                     phone: '',
+                    type: [],
                     birthDate: '',
                     nationality: '',
                     person_status: '',
@@ -283,6 +301,7 @@
                     fname: '',
                     lname: '',
                     phone: '',
+                    type: [],
                     birthDate: '',
                     nationality: '',
                     person_status: '',
@@ -378,6 +397,7 @@
                 newPerson.append('person_status', this.person.person_status);
                 newPerson.append('person_lat', this.person.address.geo.lat);
                 newPerson.append('person_lng', this.person.address.geo.lng);
+                newPerson.append('person_type', JSON.stringify(this.person.type));
                 newPerson.append('user_id', localStorage.getItem('admin_user_data'));
                 try {
                     let res = await personService.addNewPerson(newPerson);
@@ -395,7 +415,6 @@
                 }
             },
             validateLatLng () {
-                console.log(this.person.address.geo)
                 if (this.person.address.geo.lat === null || this.person.address.geo.lng === null) {
                     return true
                 }
