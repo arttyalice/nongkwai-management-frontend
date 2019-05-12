@@ -5,6 +5,10 @@ export default {
         let res = await apiService.get(`/person/get/all?page=${page}&size=${size}&search=${search}`);
         return res.data;
     },
+    async getPersonList () {
+        let res = await apiService.get('/person/get/list')
+        return res.data
+    },
     async getPersonbyID (pID) {
         let res = await apiService.get(`/person/get/one/${pID}`);
         return res.data;

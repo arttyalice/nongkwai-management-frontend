@@ -51,18 +51,18 @@
         >
           <template slot-scope="item">
             <el-row>
-              <el-col :span="12">
+              <el-col :span="24">
                 <router-link :to="`/elder/update/${item.row.id_card}`">
                   <el-button type="success" plain icon="el-icon-edit">
                     แก้ไข
                   </el-button>
                 </router-link>
               </el-col>
-              <el-col :span="12">
+              <!-- <el-col :span="12">
                 <el-button @click="removePerson(item.row)" type="danger" plain icon="el-icon-delete">
                   ลบ
                 </el-button>
-              </el-col>
+              </el-col> -->
             </el-row>
           </template>
         </el-table-column>

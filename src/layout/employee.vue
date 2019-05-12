@@ -44,6 +44,18 @@
                       <span slot="title">เยี่ยมบ้าน</span>
                     </el-menu-item>
                 </router-link>
+                <router-link to="/treatment">
+                    <el-menu-item index="2">
+                      <i class="tiny material-icons">favorite</i>
+                      <span slot="title">การรักษา</span>
+                    </el-menu-item>
+                </router-link>
+                <router-link to="/allowance">
+                    <el-menu-item index="2">
+                      <i class="tiny material-icons">attach_money</i>
+                      <span slot="title">เบี้ยยังชีพ</span>
+                    </el-menu-item>
+                </router-link>
             </el-menu>
         </el-aside>
 
@@ -54,7 +66,15 @@
                     <el-button className="menu-button" @click="isCollapse = !isCollapse" icon="el-icon-more" circle>
                     </el-button>
                     </el-col>
-                    <el-col :span="12" style="text-align: right;"><span @click="userLogout">{{ user.username }}</span></el-col>
+                    <el-col :span="12" style="text-align: right;">
+                      <el-popover
+                        placement="bottom"  
+                        trigger="click"
+                      >
+                        <el-button style="width: 100%;" @click="userLogout">ออกจากระบบ</el-button>
+                        <el-button type="primary" slot="reference">{{ `${user.fistname} ${user.lastname}` }}</el-button>
+                      </el-popover>
+                    </el-col>
                 </el-row>
             </el-header>
             

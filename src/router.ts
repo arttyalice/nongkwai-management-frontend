@@ -27,9 +27,16 @@ import UpdateDisabled from './views/Disabled/update.vue';
 // Visiting Component
 import Visiting from './views/Visiting/index.vue';
 import ManageVisiting from './views/Visiting/manage.vue';
-import VisitingADLSummary from './views/Visiting/adl/summary/index';
+import VisitingADLSummary from './views/Visiting/adl/summary/index.vue';
 import InsertVisiting from './views/Visiting/insert.vue';
 import UpdateVisiting from './views/Visiting/update.vue';
+// Treatment Component
+import Treatment from './views/Treatment/index.vue'
+import ManageTreatment from './views/Treatment/manage.vue'
+import InsertTreatment from './views/Treatment/insert.vue'
+// Allowance Component
+import Allowance from './views/Allowance.vue'
+
 
 Vue.use(Router);
 
@@ -91,5 +98,17 @@ export default new Router({
         { path: 'update/:pID', component: UpdateVisiting },
       ]
     },
+    {
+      path: '/treatment',
+      component: Treatment,
+      children: [
+        { path: '', component: ManageTreatment },
+        { path: 'insert', component: InsertTreatment },
+      ]
+    },
+    {
+      path: "/allowance",
+      component: Allowance
+    }
   ],
 });

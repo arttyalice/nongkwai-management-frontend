@@ -3,7 +3,7 @@
     <span>
         <el-row>
             <el-col class="align-l" :span="12">
-                <h2>เพิ่มข้อมูลผู้ป่วยโรคเอดส์</h2>
+                <h2>แก้ไขข้อมูลผู้ป่วยโรคเอดส์</h2>
             </el-col>
             <el-col class="align-r" :span="12">
                 <router-link to="/aid">
@@ -16,12 +16,17 @@
         <el-form ref="form" :model="person" :rules="rules" label-width="120px" class="demo-form-inline">
             <!-- Person info -->
             <el-row>
-                <h2>ข้อมูลส่วนตัว</h2>
+                <h2>ที่พักอาศัย</h2>
             </el-row>
             <el-row>
                 <el-col :span="8">
-                    <el-form-item label="คำนำหน้า :" prop="titlename">
-                        <el-input placeholder="นาย, นาง, นางสาว" v-model="person.titlename"></el-input>
+                    <el-form-item label="ผู้ครอบครองของที่พัก: " prop="titlename">
+                        <el-radio-group v-model="visit[item.name]">
+                            <el-radio    
+                                :label="เป็นของตนเอง"
+                            >
+                            </el-radio>
+                        </el-radio-group>
                     </el-form-item>
                 </el-col>
             </el-row>

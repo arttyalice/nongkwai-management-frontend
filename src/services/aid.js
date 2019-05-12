@@ -6,19 +6,19 @@ export default {
         return res.data;
     },
     async getPersonbyID (pID) {
-        let res = await apiService.get(`/person/get/one/${pID}`);
+        let res = await apiService.get(`/aid/get/one/${pID}`);
         return res.data;
     },
     async addNewPerson (req) {
-        let res = await apiService.post('/person/insert', req);
+        let res = await apiService.post('/aid/insert', req);
         return res
     },
     async removePerson (pID) {
-        let res = await apiService.get('/person/delete/' + pID);
+        let res = await apiService.get('/aid/delete/' + pID);
         return res
     },
     async updatePerson (req, pID) {
-        let res = await apiService.post('/person/update/' + pID, req);
+        let res = await apiService.post('/aid/update/' + pID, req);
         return res
     }
 }
