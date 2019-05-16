@@ -5,7 +5,8 @@
         <AdminDrawer v-if="Number(user.position_id) === 4" :user="user" @logOutSuccess="checkIsUserLogin" >
           <router-view/>
         </AdminDrawer>
-        <EmployeeDrawer v-if="Number(user.position_id) === 3" :user="user" @logOutSuccess="checkIsUserLogin" >
+        <!-- <EmployeeDrawer v-if="Number(user.position_id) === 3" :user="user" @logOutSuccess="checkIsUserLogin" > -->
+        <EmployeeDrawer v-else :user="user" @logOutSuccess="checkIsUserLogin" >
           <router-view/>
         </EmployeeDrawer>
       </span>

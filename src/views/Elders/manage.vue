@@ -4,12 +4,13 @@
       <el-col :span="12" class="align-l">
         จัดการข้อมูลผู้สูงอายุ
       </el-col>
-      <el-col :span="12" class="align-r">
-          <router-link to="/elder/insert">
-            <el-button type="primary" plain @click="dialogVisible = true">
-                เพิ่มข้อมูลสูงอายุ
-            </el-button>
-          </router-link>
+    </el-row>
+    <el-row class="search-bar-margin">
+      <el-col :span="12">
+        <el-input placeholder="ค้นหาผู้สูงอายุ" v-model="searchtext" />
+      </el-col>
+      <el-col class="align-l" :span="12">
+        <el-button @click="serachingData" style="margin-left: 5px;" type="primary" icon="el-icon-search">ค้นหา</el-button>
       </el-col>
     </el-row>
     <el-row>
@@ -38,7 +39,7 @@
         >
         </el-table-column>
         <el-table-column
-          label="person_birthday"
+          label="วัน/เดือน/ปี เกิด"
         >
           <template slot-scope="item">
             {{ momentDate(item.row.person_birthday) }}
@@ -58,11 +59,6 @@
                   </el-button>
                 </router-link>
               </el-col>
-              <!-- <el-col :span="12">
-                <el-button @click="removePerson(item.row)" type="danger" plain icon="el-icon-delete">
-                  ลบ
-                </el-button>
-              </el-col> -->
             </el-row>
           </template>
         </el-table-column>
@@ -92,27 +88,32 @@
         },
         data() {
             return {
-                    currentPage: 0,
-                    updateModalVisible: false,
-                    userInfo: {},
-                    personList: [],
-                    userPosition: [],
-                    userStatus: [
-                    { id: 0, name: 'ผู้ดูแลระบบ' },
-                    { id: 1, name: 'ผู้ใช้งานระบบ' },
-                ],
+              searchtext: '',
+              currentPage: 0,
+              updateModalVisible: false,
+              userInfo: {},
+              personList: [],
+              userPosition: [],
+              userStatus: [
+                { id: 0, name: 'ผู้ดูแลระบบ' },
+                { id: 1, name: 'ผู้ใช้งานระบบ' },
+              ],
             };
         },
         async created() {
-            this.personList = await personService.getAllPerson(this.currentPage, 10, '');
+            this.personList = await personService.getAllPerson(this.currentPage, 10, this.searchtext);
         },
         methods: {
             onPageChange(page) {
                 this.currentPage = page - 1;
                 this.fetchChange();
             },
+            serachingData() {
+              this.currentPage = 0;
+              this.fetchChange();
+            },
             async fetchChange() {
-                this.personList = await personService.getAllPerson(this.currentPage, 10, '');
+                this.personList = await personService.getAllPerson(this.currentPage, 10, this.searchtext);
             },
             async removePerson(row) {
                 this.$confirm(`โปรดตรวจสอบให้แน่ใจอีกครั้งข้อมูลของ ${row.person_firstname} ${row.person_lastname} จะไม่สามารถกูคืนได้`,

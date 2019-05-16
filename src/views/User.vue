@@ -8,6 +8,14 @@
         <InsertModal @addUserSuccess="fetchChange" :userPosition="userPosition" :userStatus="userStatus" />
       </el-col>
     </el-row>
+    <el-row class="search-bar-margin">
+      <el-col :span="12">
+        <el-input placeholder="ค้นหาผู้ใช้งาน" v-model="searchtext" />
+      </el-col>
+      <el-col class="align-l" :span="12">
+        <el-button @click="serachingData" style="margin-left: 5px;" type="primary" icon="el-icon-search">ค้นหา</el-button>
+      </el-col>
+    </el-row>
     <el-row>
       <el-table
         :data="usersList"
@@ -56,6 +64,15 @@
         </el-table-column>
       </el-table>
     </el-row>
+    <el-row style="margin-top: 15px;">
+        <el-pagination
+            background
+            layout="prev, pager, next"
+            :total="usersList.length"
+            @current-change="onPageChange"    
+        >
+        </el-pagination>
+    </el-row>
     <UpdateModal v-if="updateModalVisible" @closeDialog="updateModalVisible = false" :userInfo="userInfo" @addUserSuccess="fetchChange" :userPosition="userPosition" :userStatus="userStatus" />
   </div>
 </template>
@@ -72,23 +89,33 @@
     },
     data() {
       return {
+        searchtext: '',
+        currentPage: 0,
         updateModalVisible: false,
         userInfo: {},
         usersList: [],
         userPosition: [],
         userStatus: [
-          {id: 0, name: 'ผู้ดูแลระบบ'},
-          {id: 1, name: 'ผู้ใช้งานระบบ'},
+          {id: 1, name: 'ผู้ดูแลระบบ'},
+          {id: 0, name: 'ผู้ใช้งานระบบ'},
         ],
       };
     },
     async created() {
-      this.usersList = await userService.getAllUser(0, 10, '');
+      this.usersList = await userService.getAllUser(this.currentPage, 10, this.searchtext);
       this.userPosition = await userService.getUserPosition();
     },
     methods: {
+      onPageChange(page) {
+        this.currentPage = page - 1;
+        this.fetchChange();
+      },
+      serachingData() {
+        this.currentPage = 0;
+        this.fetchChange();
+      },
       async fetchChange() {
-        this.usersList = await userService.getAllUser(0, 10, '');
+        this.usersList = await userService.getAllUser(this.currentPage, 10, this.searchtext);
       },
       async triggerUpdateModal(uID) {
         this.userInfo = await userService.getUserbyID(uID);

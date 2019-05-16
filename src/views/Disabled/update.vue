@@ -19,25 +19,25 @@
                     <el-form-item label="ประเภทความพิการ: " prop="titlename">
                         <el-row>
                             <el-radio-group v-model="disability.type">
-                                <el-col :span="8">
+                                <el-col :span="24">
                                     <el-radio label="ความพิการทางการเห็น" />
                                 </el-col>
-                                <el-col :span="8">
+                                <el-col :span="24">
                                     <el-radio label="ความพิการทางสติปัญญา" />
                                 </el-col>
-                                <el-col :span="8">
+                                <el-col :span="24">
                                     <el-radio label="ความพิการทางการได้ยินหรือสื่อความหมาย" />
                                 </el-col>
-                                <el-col :span="8">
+                                <el-col :span="24">
                                     <el-radio label="ความพิการทางการเรียนรู้" />
                                 </el-col>
-                                <el-col :span="8">
+                                <el-col :span="24">
                                     <el-radio label="ความพิการทางการเคลื่นไหวหรือร่างกาย" />
                                 </el-col>
-                                <el-col :span="8">
+                                <el-col :span="24">
                                     <el-radio label="ความพิการทางออทิสติก" />
                                 </el-col>
-                                <el-col :span="8">
+                                <el-col :span="24">
                                     <el-radio label="ความพิการทางจิตใจหรือพฤติกรรม" />
                                 </el-col>
                             </el-radio-group>
@@ -66,16 +66,16 @@
                         <el-row>
                             <el-radio-group v-model="disability.getmoney_method">
                                 <el-col :span="12">
-                                    <el-radio :value="1" label="รับเงินสดด้วยตนเอง" />
+                                    <el-radio :label="1">รับเงินสดด้วยตนเอง</el-radio>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-radio :value="2" label="รับเงินสดโดยบุคคลที่ได้รับมอบอำนาจจากผู้มีสิทธิ/ผู้ดูแล" />
+                                    <el-radio :label="2">รับเงินสดโดยบุคคลที่ได้รับมอบอำนาจจากผู้มีสิทธิ/ผู้ดูแล</el-radio>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-radio :value="3" label="โอนเข้าบัญชีเงินฝากธนาคารในนามผู้มีสิทธิ" />
+                                    <el-radio :label="3">โอนเข้าบัญชีเงินฝากธนาคารในนามผู้มีสิทธิ</el-radio>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-radio :value="4" label="โอนเข้าบัญชีเงินฝากธนาคารในนามบุคคลที่ได้รับมอบอำนาจจากผู้มีสิทธิ/ผู้ดูแล" />
+                                    <el-radio :label="4">โอนเข้าบัญชีเงินฝากธนาคารในนามบุคคลที่ได้รับมอบอำนาจจากผู้มีสิทธิ/ผู้ดูแล</el-radio>
                                 </el-col>
                             </el-radio-group>
                         </el-row>
@@ -126,7 +126,7 @@
                     type: res.disability_type,
                     info: res.disability_info,
                     detail: res.disability_detail,
-                    getmoney_method: res.getmoney_id
+                    getmoney_method: parseInt(res.getmoney_id)
                 }
             } catch (error) {
                 this.$alert('มีบางอย่างผิดพลาด โปรดลองใหม่ในภายหลัง', 'บางอย่างผิดพลาด!', {
@@ -164,6 +164,7 @@
                 };
             },
             async saveUpdatePerson() {
+                console.log(this.disability)
                 let valid = null;
                 await this.$refs.form.validate((val) => {
                     valid = val;

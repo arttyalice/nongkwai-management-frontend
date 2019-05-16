@@ -5,12 +5,12 @@
         จัดการข้อมูลผู้ป่วยโรคเอดส์
       </el-col>
     </el-row>
-    <el-row>
+    <el-row class="search-bar-margin">
       <el-col :span="12">
         <el-input placeholder="ค้นหาผู้ป่วย" v-model="searchtext" />
       </el-col>
       <el-col class="align-l" :span="12">
-        <el-button @click="serachingData" style="margin-left: 5px;" type="primary" icon="el-icon-search">ค้นหา</el-button>
+        <el-button  @click="serachingData" style="margin-left: 5px;" type="primary" icon="el-icon-search">ค้นหา</el-button>
       </el-col>
     </el-row>
     <el-row>
@@ -39,7 +39,7 @@
         >
         </el-table-column>
         <el-table-column
-          label="วันเกิด"
+          label="วัน/เดือน/ปี เกิด"
         >
           <template slot-scope="item">
             {{ momentDate(item.row.person_birthday) }}
@@ -54,7 +54,7 @@
             <el-row>
               <el-col :span="12">
                 <el-button @click="showPatientModal(item.row)" type="info" plain>
-                    ผู้ป่วย
+                    ดูข้อมูล
                 </el-button>
               </el-col>
               <el-col :span="12">
@@ -68,21 +68,16 @@
         <el-table-column
           label="ตัวเลือก"
           align="center"
-          width="300"
+          width="200"
         >
           <template slot-scope="item">
             <el-row>
-              <el-col :span="12">
+              <el-col :span="24">
                 <router-link :to="`/aid/update/${item.row.id_card}`">
                   <el-button type="success" plain icon="el-icon-edit">
                     แก้ไข
                   </el-button>
                 </router-link>
-              </el-col>
-              <el-col :span="12">
-                <el-button @click="removePerson(item.row)" type="danger" plain icon="el-icon-delete">
-                  ลบ
-                </el-button>
               </el-col>
             </el-row>
           </template>
@@ -180,3 +175,8 @@
     };
 </script>
 
+<style>
+  .search-bar-margin {
+    margin: 20px 0;
+  }
+</style>

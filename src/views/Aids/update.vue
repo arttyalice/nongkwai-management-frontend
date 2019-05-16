@@ -3,7 +3,7 @@
     <span>
         <el-row>
             <el-col class="align-l" :span="12">
-                <h2>แก้ไขข้อมูลผู้ป่วยโรคเอดส์ {{ `${person.fname} ${person.lname}` }}</h2>
+                <h2>แก้ไขข้อมูลผู้ป่วยโรคเอดส์ {{ `${person.person_firstname} ${person.person_lastname}` }}</h2>
             </el-col>
             <el-col class="align-r" :span="12">
                 <router-link to="/aid">
@@ -16,10 +16,10 @@
         <el-form ref="form" :model="person" :rules="rules" label-width="150px" class="form-style">
             <el-row style="margin-top: 20px;">
                 <el-col :span="12">
-                    รหัสบัตรประชาชน: {{ person.id_card }}
+                    <b>รหัสบัตรประชาชน</b>: {{ person.id_card }}
                 </el-col>
                 <el-col :span="12">
-                    ชื่อ: {{ `${person.person_titlename} ${person.person_firstname}\t${person.person_lastname}` }}
+                    <b>ชื่อ</b>: {{ `${person.person_titlename} ${person.person_firstname}\t${person.person_lastname}` }}
                 </el-col>
             </el-row>
             <!-- Habitant info -->

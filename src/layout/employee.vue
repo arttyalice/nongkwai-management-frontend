@@ -8,16 +8,16 @@
                       <span slot="title">หน้าหลัก</span>
                     </el-menu-item>
                 </router-link>
-                <router-link to="/user">
+                <!-- <router-link to="/user">
                     <el-menu-item index="2">
                       <i class="tiny material-icons">people</i>
                       <span slot="title">จัดการผู้ใช้งานระบบ</span>
                     </el-menu-item>
-                </router-link>
+                </router-link> -->
                 <router-link to="/person">
                     <el-menu-item index="2">
                       <i class="tiny material-icons">person</i>
-                      <span slot="title">จัดการคน</span>
+                      <span slot="title">จัดการข้อมูลประชากร</span>
                     </el-menu-item>
                 </router-link>
                 <router-link to="/aid">
@@ -53,7 +53,7 @@
                 <router-link to="/allowance">
                     <el-menu-item index="2">
                       <i class="tiny material-icons">attach_money</i>
-                      <span slot="title">เบี้ยยังชีพ</span>
+                      <span slot="title">ข้อมูลการรับเบี้ยยังชีพ</span>
                     </el-menu-item>
                 </router-link>
             </el-menu>
@@ -109,5 +109,13 @@
     &.employee {
       background-color: $primaryEmployee!important;
     }
+  }
+
+  .left-number {
+    text-align: left!important;
+  }
+
+  .el-input-number.is-without-controls .el-input__inner {
+    text-align: left;
   }
 </style>

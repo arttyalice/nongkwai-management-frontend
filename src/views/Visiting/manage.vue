@@ -5,6 +5,14 @@
         เยี่ยมบ้านและ ประเมิณ ADL
       </el-col>
     </el-row>
+    <el-row class="search-bar-margin">
+      <el-col :span="12">
+        <el-input placeholder="ค้นหาข้อมูลการประเมิณ ADL" v-model="searchtext" />
+      </el-col>
+      <el-col class="align-l" :span="12">
+        <el-button @click="serachingData" style="margin-left: 5px;" type="primary" icon="el-icon-search">ค้นหา</el-button>
+      </el-col>
+    </el-row>
     <el-row>
       <el-table
         :data="personList"
@@ -35,26 +43,26 @@
           width="200"
         >
           <template slot-scope="item">
-            <el-tag style="margin:0 3px;" type="info" v-if="item.row.disability_id">พิการ</el-tag>
+            <el-tag style="margin:0 3px;" type="warning" v-if="item.row.disability_id">พิการ</el-tag>
             <el-tag style="margin:0 3px;" type="success" v-if="item.row.elders_id">สูงอายุ</el-tag>
-            <el-tag style="margin:0 3px;" type="warning" v-if="item.row.patient_id">เอดส์</el-tag>
+            <el-tag style="margin:0 3px;" type="danger" v-if="item.row.patient_id">เอดส์</el-tag>
           </template>
         </el-table-column>
         <el-table-column
             label="ข้อมูล"
             align="center"
-            width="250"
+            width="320"
         >
             <template slot-scope="item">
                 <el-row>
                     <el-col :span="12">
-                        <el-button @click="popToGmap(item.row.person_lat, item.row.person_lng)" type="primary" plain>
-                            เส้นทาง
+                        <el-button @click="popToGmap(item.row.person_lat, item.row.person_lng)" type="primary" plain icon="el-icon-location-outline">
+                          เส้นทาง
                         </el-button>
                     </el-col>
                     <el-col :span="12">
-                      <el-button @click="visit_history_modal(item.row.id_card)" type="success" plain>
-                        ประวัติ
+                      <el-button @click="visit_history_modal(item.row.id_card)" type="success" plain icon="el-icon-document">
+                        ประวัติการเยี่ยม
                       </el-button>
                     </el-col>
                 </el-row>
@@ -106,19 +114,20 @@
         },
         data() {
             return {
-                    currentPage: 0,
-					historyModalVisible: false,
-                    userInfo: {},
-                    personList: [],
-                    userPosition: [],
-                    userStatus: [
-                    { id: 0, name: 'ผู้ดูแลระบบ' },
-                    { id: 1, name: 'ผู้ใช้งานระบบ' },
-                ],
+              searchtext: '',
+              currentPage: 0,
+              historyModalVisible: false,
+              userInfo: {},
+              personList: [],
+              userPosition: [],
+              userStatus: [
+                { id: 0, name: 'ผู้ดูแลระบบ' },
+                { id: 1, name: 'ผู้ใช้งานระบบ' },
+              ],
             };
         },
         async created() {
-            this.personList = await visitingService.getAllPerson(this.currentPage, 10, '');
+            this.personList = await visitingService.getAllPerson(this.currentPage, 10, this.searchtext);
         },
         methods: {
             popToGmap (lat, lng) {
@@ -130,8 +139,12 @@
                 this.currentPage = page - 1;
                 this.fetchChange();
             },
+            serachingData() {
+              this.currentPage = 0;
+              this.fetchChange();
+            },
             async fetchChange() {
-                this.personList = await visitingService.getAllPerson(this.currentPage, 10, '');
+                this.personList = await visitingService.getAllPerson(this.currentPage, 10, this.searchtext);
             },
             async visit_history_modal(id_card) {
 				this.userInfo = {

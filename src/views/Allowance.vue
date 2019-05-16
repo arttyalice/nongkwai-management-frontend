@@ -2,11 +2,11 @@
   <div class="about">
     <el-row>
       <el-col :span="12" class="align-l">
-        จัดการเบี้ยเลี้ยงยังชีพ
+        จัดการข้อมูลเบี้ยยังชีพ
       </el-col>
       <el-col :span="12" class="align-r">
         <el-button type="primary" plain @click="insertModalVisible = true">
-            เพิ่มข้อมูล
+            เพิ่มข้อมูลเบี้ยยังชีพ
         </el-button>
       </el-col>
     </el-row>
@@ -40,7 +40,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="ประเภทเบี้ยเลี้ยง"
+          label="ประเภทเบี้ยยังชีพ"
           width="130"
         >
           <template slot-scope="item">
@@ -49,7 +49,7 @@
         </el-table-column>
         <el-table-column
           prop="allowance_year"
-          label="ปีเบี้ยเลี้ยง"
+          label="ปีที่ได้รับเบี้ยยังชีพ"
           width="100"
         >
         </el-table-column>

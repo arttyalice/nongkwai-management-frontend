@@ -149,7 +149,7 @@
             },
             calculateAge (date) {
                 const now = moment(date)
-                return moment([now.year() - 543, now.month(), now.date()]).fromNow(true)
+                return moment([now.year() - 543, now.month(), now.date()]).lang('th').fromNow(true)
             }
         }
     };

@@ -13,6 +13,14 @@
       </el-col>
     </el-row>
     <el-row>
+      <el-col :span="12">
+        <el-input placeholder="ค้นหาประวัติการรักษา" v-model="searchtext" />
+      </el-col>
+      <el-col class="align-l" :span="12">
+        <el-button @click="serachingData" style="margin-left: 5px;" type="primary" icon="el-icon-search">ค้นหา</el-button>
+      </el-col>
+    </el-row>
+    <el-row>
       <el-table
         :data="personList"
         style="width: 100%"
@@ -40,6 +48,12 @@
             <el-tag style="margin:0 3px;" type="success" v-if="item.row.elders_id">สูงอายุ</el-tag>
             <el-tag style="margin:0 3px;" type="warning" v-if="item.row.patient_id">เอดส์</el-tag>
           </template>
+        </el-table-column>
+        <el-table-column
+          prop="person_phone"
+          label="เบอร์โทรศัพท์"
+          width="130"
+        >
         </el-table-column>
         <el-table-column
           prop="SBP"
@@ -125,19 +139,21 @@
         },
         data() {
             return {
-                    currentPage: 0,
-					historyModalVisible: false,
-                    userInfo: {},
-                    personList: [],
-                    userPosition: [],
-                    userStatus: [
-                    { id: 0, name: 'ผู้ดูแลระบบ' },
-                    { id: 1, name: 'ผู้ใช้งานระบบ' },
-                ],
+              searchtext: '',
+              currentPage: 0,
+					    historyModalVisible: false,
+              userInfo: {},
+              personList: [],
+              userPosition: [],
+              userStatus: [
+                { id: 0, name: 'ผู้ดูแลระบบ' },
+                { id: 1, name: 'ผู้ใช้งานระบบ' },
+              ],
             };
         },
         async created() {
-            this.personList = await treatmentService.getAllTreatment(this.currentPage, 10, '');
+            this.personList = await treatmentService.getAllTreatment(this.currentPage, 10, this.searchtext);
+            console.log(this.personList)
         },
         methods: {
             popToGmap (lat, lng) {
@@ -149,8 +165,12 @@
                 this.currentPage = page - 1;
                 this.fetchChange();
             },
+            serachingData() {
+              this.currentPage = 0;
+              this.fetchChange();
+            },
             async fetchChange() {
-                this.personList = await treatmentService.getAllPerson(this.currentPage, 10, '');
+                this.personList = await treatmentService.getAllPerson(this.currentPage, 10, this.searchtext);
             },
             async visit_history_modal(id_card) {
 				this.userInfo = {

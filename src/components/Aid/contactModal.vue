@@ -8,13 +8,15 @@
             :before-close="handleClose"
         >
             <span class="align-l">
-                <el-row>
-                    <el-col class="align-r">
-                        <el-button type="primary" plain>
-                            เพิ่มข้อมูลผู้ติดต่อ
-                        </el-button>
-                    </el-col>
-                </el-row>
+                <router-link to="/aid/contact/insert">
+                    <el-row>
+                        <el-col class="align-r">
+                            <el-button type="primary" plain>
+                                เพิ่มข้อมูลผู้ติดต่อ
+                            </el-button>
+                        </el-col>
+                    </el-row>
+                </router-link>
                 <el-table
                     :data="contacts"
                     style="width: 100%"
@@ -54,12 +56,17 @@
                     </el-table-column>
                     <el-table-column
                         prop="address"
-                        label="ที่อยู่"
-                        width="130"
+                        label="ตัวเลือก"
+                        width="189"
                         align="center"
                     >
                         <template slot-scope="item">
-                            <el-button @click="removeContact(item.row)" type="danger" plain icon="el-icon-delete">
+                            <router-link :to="`/aid/contact/update/${item.row.contact_id}`">
+                                <el-button type="success" plain>
+                                    แก้ไข
+                                </el-button>
+                            </router-link>
+                            <el-button style="margin-left: 5px;" @click="removeContact(item.row)" type="danger" plain icon="el-icon-delete">
                                 ลบ
                             </el-button>
                         </template>
@@ -87,6 +94,7 @@
             };
         },
         async created () {
+            console.log(this.patientInfo)
             this.contacts = await contactService.getContactbyPatientID(this.patientInfo.patient_id);
         },
         methods: {

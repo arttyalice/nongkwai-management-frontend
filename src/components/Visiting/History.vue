@@ -13,16 +13,36 @@
                 <el-table-column
                     prop="visiting_date"
                     label="วันที่เยี่ยม"
-                    width="180">
+                    width="150">
                 </el-table-column>
                 <el-table-column
                     prop="adl_summary"
-                    label="ผลรวมคะแนน adl"
+                    label="ผลรวมคะแนน ADL"
+                    align="center"
                     width="180">
                 </el-table-column>
                 <el-table-column
+                    label="ผลรวมคะแนน ADL"
+                    width="180"
+                >
+                    <template slot-scope="item">
+                        <el-tag v-if="item.row.adl_summary <= 2" type="info">
+                            ภาวะพึ่งพาโดยสมบูรณ์
+                        </el-tag>
+                        <el-tag v-else-if="item.row.adl_summary <= 5" type="danger">
+                            ภาวะพึ่งพารุนแรง
+                        </el-tag>
+                        <el-tag v-else-if="item.row.adl_summary <= 8" type="warning">
+                            ภาวะพึ่งพาปานกลาง
+                        </el-tag>
+                        <el-tag v-else type="success">
+                            ไม่เป็นภาระพึ่งพา
+                        </el-tag>
+                    </template>
+                </el-table-column>
+                <el-table-column
                     prop="visiting_detail"
-                    label="รายนละเอียด">
+                    label="รายละเอียด">
                 </el-table-column>
             </el-table>
         </span>

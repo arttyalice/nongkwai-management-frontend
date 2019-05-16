@@ -4,15 +4,8 @@
       <el-col :span="12" class="align-l">
         จัดการข้อมูลผู้พิการ
       </el-col>
-      <el-col :span="12" class="align-r">
-          <router-link to="/disabled/insert">
-            <el-button type="primary" plain @click="dialogVisible = true">
-                เพิ่มข้อมูลผู้พิการ
-            </el-button>
-          </router-link>
-      </el-col>
     </el-row>
-    <el-row>
+    <el-row class="search-bar-margin">
       <el-col :span="12">
         <el-input placeholder="ค้นหาผู้พิการ" v-model="searchtext" />
       </el-col>
@@ -58,7 +51,7 @@
         >
         </el-table-column>
         <el-table-column
-          label="person_birthday"
+          label="วัน/เดือน/ปี เกิด"
         >
           <template slot-scope="item">
             {{ momentDate(item.row.person_birthday) }}

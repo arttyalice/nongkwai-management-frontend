@@ -13,13 +13,25 @@
             </el-col>
         </el-row>
 
-        <el-form ref="form" :model="treatment" :rules="rules" label-width="120px" class="demo-form-inline">  
+        <el-form ref="form" :model="treatment" :rules="rules" label-width="200px" class="demo-form-inline">  
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="ผู้รับการรักษา :" prop="id_card">
                         <el-select filterable style="width: 100%" v-model="treatment.id_card">
                             <el-option v-for="item in personlist" :key="item.id_card" :label="item.name" :value="item.id_card"></el-option>
                         </el-select>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="12">
+                    <el-form-item label="โรคประจำตัว :" prop="disease">
+                        <el-input v-model="treatment.disease" placeholder="แพ้ฝุ่น, หอบหืด"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="สถานพยาบาลที่เข้ารับบริการ :" prop="hospital">
+                        <el-input v-model="treatment.hospital" placeholder="น้ำหนัก(กิโลกรัม)"></el-input>                        
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -95,6 +107,8 @@
                 treatment: {
                     id_card: '',
                     detail: '',
+                    disease: '',
+                    hospital: '',
                     height: null,
                     weigth: null,
                     SBP: null,
@@ -137,6 +151,8 @@
                 let req = new FormData()
                 req.append("user_id", localStorage.getItem('admin_user_data'))
                 req.append("treatment_detail", this.treatment.detail)
+                req.append("disease", this.treatment.disease)
+                req.append("hospital", this.treatment.hospital)
                 req.append("height", this.treatment.height)
                 req.append("weigth", this.treatment.weigth)
                 req.append("SBP", this.treatment.SBP)

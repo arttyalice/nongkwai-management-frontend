@@ -6,7 +6,7 @@
                 <h2>แก้ไขข้อมูลผู้สูงอายุ {{ `${person.person_firstname} ${person.person_lastname}` }}</h2>
             </el-col>
             <el-col class="align-r" :span="12">
-                <router-link to="/disabled">
+                <router-link to="/elder">
                     <el-button plain>
                         กลับ
                     </el-button>
@@ -37,16 +37,16 @@
                         <el-row>
                             <el-radio-group v-model="elder.getmoney_method">
                                 <el-col :span="12">
-                                    <el-radio :value="1" label="รับเงินสดด้วยตนเอง" />
+                                    <el-radio :label="1">รับเงินสดด้วยตนเอง</el-radio>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-radio :value="2" label="รับเงินสดโดยบุคคลที่ได้รับมอบอำนาจจากผู้มีสิทธิ/ผู้ดูแล" />
+                                    <el-radio :label="2">รับเงินสดโดยบุคคลที่ได้รับมอบอำนาจจากผู้มีสิทธิ/ผู้ดูแล</el-radio>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-radio :value="3" label="โอนเข้าบัญชีเงินฝากธนาคารในนามผู้มีสิทธิ" />
+                                    <el-radio :label="3">โอนเข้าบัญชีเงินฝากธนาคารในนามผู้มีสิทธิ</el-radio>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-radio :value="4" label="โอนเข้าบัญชีเงินฝากธนาคารในนามบุคคลที่ได้รับมอบอำนาจจากผู้มีสิทธิ/ผู้ดูแล" />
+                                    <el-radio :label="4">โอนเข้าบัญชีเงินฝากธนาคารในนามบุคคลที่ได้รับมอบอำนาจจากผู้มีสิทธิ/ผู้ดูแล</el-radio>
                                 </el-col>
                             </el-radio-group>
                         </el-row>
@@ -133,6 +133,7 @@
                 };
             },
             async saveUpdatePerson() {
+                console.log(this.elder)
                 let valid = null;
                 await this.$refs.form.validate((val) => {
                     valid = val;
@@ -146,8 +147,8 @@
                 }
                 const FormPerson = new FormData();
                 FormPerson.append('id_card', this.$router.currentRoute.params.pID);
-                FormPerson.append('elder_info', this.elder.info);
-                FormPerson.append('elder_detail', this.elder.detail);
+                FormPerson.append('elders_info', this.elder.info);
+                FormPerson.append('elders_detail', this.elder.detail);
                 FormPerson.append('elder_type', this.elder.type);
                 FormPerson.append('getmoney_id', this.elder.getmoney_method);
                 FormPerson.append('user_id', localStorage.getItem('admin_user_data'));
@@ -162,7 +163,7 @@
                         },
                     );
                     this.reset();
-                    this.$router.push('/disabled');
+                    this.$router.push('/elder');
                 } catch (error) {
                     this.$alert('มีบางอย่างผิดพลาดขณะบันทึกข้อมูล โปรดลองใหม่ในภายหลัง', 'บางอย่างผิดพลาด!', {
                         type: 'error',

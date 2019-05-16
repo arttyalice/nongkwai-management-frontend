@@ -3,7 +3,7 @@
     <span>
         <el-row>
             <el-col class="align-l" :span="12">
-                <h2>ประเมิณการเยี่ยมบ้าน</h2>
+                <h2>ประเมินการเยี่ยมบ้าน</h2>
             </el-col>
             <el-col class="align-r" :span="12">
                 <router-link to="/visiting">
@@ -19,13 +19,13 @@
             <h2>ข้อมูลส่วนตัว</h2>
             <el-row>
                 <el-col  :xs="24" :sm="24" :md="12" :lg="8" :xl="8">
-                    ชื่อ-สกุล: {{ `${person.person_titlename} ${person.person_firstname} ${person.person_lastname}` }}
+                    <b>ชื่อ-สกุล</b>: {{ `${person.person_titlename} ${person.person_firstname} ${person.person_lastname}` }}
                 </el-col>
                 <el-col  :xs="24" :sm="24" :md="12" :lg="8" :xl="8">
-                    เลขบัตรประชาชน: {{ `${person.id_card}` }}
+                     <b>เลขบัตรประชาชน</b>: {{ `${person.id_card}` }}
                 </el-col>
                 <el-col  :xs="24" :sm="24" :md="12" :lg="8" :xl="8">
-                    ประเภท: 
+                     <b>ประเภท</b>: 
                     <el-tag style="margin:0 3px;" type="info" v-if="person.disability_id">พิการ</el-tag>
                     <el-tag style="margin:0 3px;" type="success" v-if="person.elders_id">สูงอายุ</el-tag>
                     <el-tag style="margin:0 3px;" type="warning" v-if="person.patient_id">เอดส์</el-tag>
@@ -36,7 +36,7 @@
         <el-form ref="form" :model="visit" :rules="rules" label-width="" class="demo-form-inline">  
             <!-- Address -->
             <el-row>
-                <h2>แบบประเมิณการเยี่ยมบ้าน</h2>
+                <h2>แบบประเมินการเยี่ยมบ้าน</h2>
             </el-row>
 
             <span style="text-align: left;">
@@ -121,7 +121,7 @@
                         ans: [
                             { score: 0, label: "ไม่สามารถนั่งได้ (นั่งแล้วจะล้มเสมอ) หรือต้องใช้คนสองคนช่วยกันยกขึ้น" },
                             { score: 1, label: "ต้องการความช่วยเหลืออย่างมากจึงจะนั่งได้ เช่น ต้องใช้คนที่แข็งแรงหรือมีทักษะ 1คน หรือใช้คนทั่วไป 2 คนพยุงหรือดันขึ้นมาจึงจะนั่งอยู่ได้" },
-                            { score: 2, label: "ต้องการความช่วยเหลือบ้าง เช่นบอกให้ท าตาม หรือช่วยพยุงเล็กน้อย หรือต้องมีคนดูแลเพื่อความปลอดภัย" },
+                            { score: 2, label: "ต้องการความช่วยเหลือบ้าง เช่นบอกให้ทำตาม หรือช่วยพยุงเล็กน้อย หรือต้องมีคนดูแลเพื่อความปลอดภัย" },
                             { score: 3, label: "ทำได้เอง" }
                         ]
                     },

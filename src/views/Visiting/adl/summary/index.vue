@@ -3,7 +3,7 @@
     <span>
         <el-row>
             <el-col class="align-l" :span="12">
-                <h2>ผลการประเมิณ</h2>
+                <h2>ผลการประเมิน ADL</h2>
             </el-col>
             <el-col class="align-r" :span="12">
                 <router-link to="/visiting">
@@ -15,10 +15,10 @@
         </el-row>
 
         <el-row>
-            <el-col><h2>{{ `ผลการประเมิณของ ${summary.title} ${summary.fname} ${summary.lname}` }}</h2></el-col>
+            <el-col><h2>{{ ` ผลการประเมิน ADL ของ ${summary.title} ${summary.fname} ${summary.lname}` }}</h2></el-col>
         </el-row>
-        <el-row>
-            <el-col>{{ `ผลการประเมิณของวันที่ ${summary.created_date} ได้ทั้งหมด ${summary.score} คะแนน` }}</el-col>
+        <el-row style="font-size: 24px;">
+            <el-col>{{ `ผลการประเมิณของวันที่ ${thaidatetime(summary.created_date)} ได้ทั้งหมด` }} <b>{{summary.score}}</b> {{ `คะแนน` }}</el-col>
         </el-row>
         <el-row>
             <el-col><h3>{{ `ถูกจัดอยู่ในกลุ่ม` }}</h3></el-col>
@@ -76,6 +76,11 @@
                 this.$router.push('/visiting');
             }
         },
+        methods: {
+            thaidatetime (date) {
+                return moment(date).add(543, 'year').format('DD/MM/YYYY')
+            }
+        }
     };
 </script>
 

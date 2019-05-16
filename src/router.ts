@@ -12,17 +12,14 @@ import UpdatePerson from './views/Person/update.vue';
 // Aid Components
 import Aid from './views/Aids/index.vue';
 import ManageAid from './views/Aids/manage.vue';
-import InsertAid from './views/Aids/insert.vue';
 import UpdateAid from './views/Aids/update.vue';
 // Elder Components
 import Elder from './views/Elders/index.vue';
 import ManageElder from './views/Elders/manage.vue';
-import InsertElder from './views/Elders/insert.vue';
 import UpdateElder from './views/Elders/update.vue';
 // Disabled Components
 import Disabled from './views/Disabled/index.vue';
 import ManageDisabled from './views/Disabled/manage.vue';
-import InsertDisabled from './views/Disabled/insert.vue';
 import UpdateDisabled from './views/Disabled/update.vue';
 // Visiting Component
 import Visiting from './views/Visiting/index.vue';
@@ -66,7 +63,6 @@ export default new Router({
       component: Elder,
       children: [
         { path: '', component: ManageElder },
-        { path: 'insert', component: InsertElder },
         { path: 'update/:pID', component: UpdateElder },
       ]
     },
@@ -75,7 +71,6 @@ export default new Router({
       component: Aid,
       children: [
         { path: '', component: ManageAid },
-        { path: 'insert', component: InsertAid },
         { path: 'update/:pID', component: UpdateAid },
       ]
     },
@@ -84,7 +79,6 @@ export default new Router({
       component: Disabled,
       children: [
         { path: '', component: ManageDisabled },
-        { path: 'insert', component: InsertDisabled },
         { path: 'update/:pID', component: UpdateDisabled },
       ]
     },

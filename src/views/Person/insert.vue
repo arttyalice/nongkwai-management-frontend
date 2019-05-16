@@ -38,9 +38,18 @@
                 </el-col>
             </el-row>
             <el-row>
-                <el-col :span="18">
+                <el-col :span="12">
                     <el-form-item label="บัตรประชาชน :" prop="idCard">
                         <el-input placeholder="1239900123003" v-model="person.idCard"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="สถานะ :" prop="person_status">
+                        <el-select filterable style="width: 100%;" @change="onProvinceChange" v-model="person.person_status">
+                            <el-option label="มีชีวิตอยู่" value="มีชีวิตอยู่"></el-option>
+                            <el-option label="ถึงแก่กรรม" value="ถึงแก่กรรม"></el-option>
+                            <el-option label="ย้ายที่อยู่" value="ย้ายที่อยู่"></el-option>
+                        </el-select>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -69,7 +78,7 @@
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="เบอร์โทร :" prop="phone">
-                        <el-input placeholder="0812345678" v-model="person.phone"></el-input>
+                        <el-input v-mask="'###-#######'" v-model="person.phone" placeholder="0812345678"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
@@ -207,7 +216,7 @@
                     ],
                     phone: [
                         { required: true, message: 'กรุณากรอกเบอร์โทร', trigger: 'blur', },
-                        { min: 9, max: 10, message: 'เบอร์โทรต้องยาว 9 - 10 หลัก', trigger: 'change' },
+                        { min: 10, max: 11, message: 'เบอร์โทรต้องยาว 9 - 10 หลัก', trigger: 'change' },
                     ],
                     type: [
                         { required: true, message: 'กรุราเลือกประเภท', trigger: 'blur', },
@@ -220,13 +229,16 @@
                     ],
                     idCard: [
                         { required: true, message: 'กรุณากรอกรหัสบัตรประชาชน', trigger: 'blur', },
-                        { min: 13, max: 13, message: 'รหัสบัตรประชาชนต้องยาว 13 หลัก', trigger: 'change' },
+                        { min: 17, max: 17, message: 'รหัสบัตรประชาชนต้องยาว 13 หลัก', trigger: 'change' },
                     ],
                     titlename: [
                         { required: true, message: 'กรุณากรอกคำนำหน้าชื่อ', trigger: 'blur', },
                     ],
                     person_status: [
                         { required: true, message: 'กรุณากรอกสถานะความเป็นอยู่', trigger: 'blur', },
+                    ],
+                    type: [
+                        { required: true, message: 'กรุณากเลือกประเภท', trigger: 'change', },
                     ],
                     address: {
                         num: [
@@ -245,22 +257,22 @@
                             { required: true, message: 'กรุณากรอกชื่อหมู่บ้าน', trigger: 'blur', },
                         ],
                         Pid: [
-                            { required: true, message: 'กรุณาเลือกจังหวัด', trigger: 'blur', },
+                            { required: true, message: 'กรุณาเลือกจังหวัด', trigger: 'change', },
                         ],
                         Did: [
-                            { required: true, message: 'กรุณาเลือกอำเภอ', trigger: 'blur', },
+                            { required: true, message: 'กรุณาเลือกอำเภอ', trigger: 'change', },
                         ],
                         SDTid: [
-                            { required: true, message: 'กรุณาเลือกตำบล', trigger: 'blur', },
+                            { required: true, message: 'กรุณาเลือกตำบล', trigger: 'change', },
                         ],
                     },
                 },
                 person: {
-                    idCard: '',
+                    idCard: undefined,
                     titlename: '',
                     fname: '',
                     lname: '',
-                    phone: '',
+                    phone: undefined,
                     type: [],
                     birthDate: '',
                     nationality: '',
@@ -379,7 +391,7 @@
                     }
                 }
                 const newPerson = new FormData();
-                newPerson.append('id_card', this.person.idCard);
+                newPerson.append('id_card', this.person.idCard.replace("-",""));
                 newPerson.append('person_titlename', this.person.titlename);
                 newPerson.append('person_firstname', this.person.fname);
                 newPerson.append('person_lastname', this.person.lname);
@@ -393,7 +405,7 @@
                 newPerson.append('STDid', this.person.address.SDTid);
                 newPerson.append('Did', this.person.address.Did);
                 newPerson.append('Pid', this.person.address.Pid);
-                newPerson.append('person_phone', this.person.phone);
+                newPerson.append('person_phone', this.person.phone.replace("-",""));
                 newPerson.append('person_status', this.person.person_status);
                 newPerson.append('person_lat', this.person.address.geo.lat);
                 newPerson.append('person_lng', this.person.address.geo.lng);

@@ -17,8 +17,9 @@ export default {
         let res = await apiService.get('/elder/delete/' + pID);
         return res
     },
-    async updatePerson (req, dID) {
-        let res = await apiService.post('/elder/update/' + dID, req);
+    async updatePerson (req, edID) {
+        let res = await apiService.post('/elder/update/' + edID, req);
+        console.log(res)
         return res
     }
 }

@@ -20,7 +20,7 @@
                         <el-input v-model="user.lname"></el-input>
                     </el-form-item>
                     <el-form-item label="เบอร์โทร :" prop="phone">
-                        <el-input type="age" v-model="user.phone"></el-input>
+                        <el-input v-mask="'###-#######'" type="age" v-model="user.phone"></el-input>
                     </el-form-item>
                     <el-form-item label="ชื่อผู้ใช้ :" prop="username">
                         <el-input v-model="user.username"></el-input>
@@ -65,7 +65,7 @@
                 ],
                 phone: [
                     { required: true, message: 'กรุณากรอกเบอร์โทร', trigger: 'blur', },
-                    { min: 9, max: 10, message: 'เบอร์โทรต้องยาว 9 - 10 หลัก', trigger: 'blur' },
+                    { min: 10, max: 11, message: 'เบอร์โทรต้องยาว 9 - 10 หลัก', trigger: 'blur' },
                 ],
                 username: [
                     { required: true, message: 'กรุณากรอกชื่อผู้ใช้', trigger: 'blur', },
@@ -128,7 +128,7 @@
                 const newUser = new FormData();
                 newUser.append('first_name', this.user.fname);
                 newUser.append('last_name', this.user.lname);
-                newUser.append('phone', this.user.phone);
+                newUser.append('phone', this.user.phone.replace("-",""));
                 newUser.append('user_name', this.user.username);
                 newUser.append('user_pass', this.user.password);
                 newUser.append('position_id', this.user.position);

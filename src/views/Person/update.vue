@@ -38,9 +38,18 @@
                 </el-col>
             </el-row>
             <el-row>
-                <el-col :span="18">
+                <el-col :span="12">
                     <el-form-item label="บัตรประชาชน :" prop="idCard">
-                        <el-input placeholder="1239900123003" v-model="person.idCard"></el-input>
+                        <el-input v-mask="'#-####-#####-##-#'" placeholder="1239900123003" v-model="person.idCard"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="สถานะ :" prop="person_status">
+                        <el-select filterable style="width: 100%;" @change="onProvinceChange" v-model="person.person_status">
+                            <el-option label="มีชีวิตอยู่" value="มีชีวิตอยู่"></el-option>
+                            <el-option label="ถึงแก่กรรม" value="ถึงแก่กรรม"></el-option>
+                            <el-option label="ย้ายที่อยู่" value="ย้ายที่อยู่"></el-option>
+                        </el-select>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -69,7 +78,7 @@
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="เบอร์โทร :" prop="phone">
-                        <el-input placeholder="0812345678" v-model="person.phone"></el-input>
+                        <el-input v-mask="'###-#######'" placeholder="0812345678" v-model="person.phone"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
@@ -227,6 +236,9 @@
                     person_status: [
                         { required: true, message: 'กรุณากรอกสถานะความเป็นอยู่', trigger: 'blur' },
                     ],
+                    type: [
+                        { required: true, message: 'กรุณากรอกสถานะความเป็นอยู่', trigger: 'change' },
+                    ],
                     address: {
                         num: [
                             { required: true, message: 'กรุณากรอกเลขที่บ้าน', trigger: 'blur' },
@@ -244,13 +256,13 @@
                             { required: true, message: 'กรุณากรอกชื่อหมู่บ้าน', trigger: 'blur' },
                         ],
                         Pid: [
-                            { required: true, message: 'กรุณาเลือกจังหวัด', trigger: 'blur' },
+                            { required: true, message: 'กรุณาเลือกจังหวัด', trigger: 'change' },
                         ],
                         Did: [
-                            { required: true, message: 'กรุณาเลือกอำเภอ', trigger: 'blur' },
+                            { required: true, message: 'กรุณาเลือกอำเภอ', trigger: 'change' },
                         ],
                         SDTid: [
-                            { required: true, message: 'กรุณาเลือกตำบล', trigger: 'blur' },
+                            { required: true, message: 'กรุณาเลือกตำบล', trigger: 'change' },
                         ],
                     },
                 },
@@ -286,6 +298,7 @@
             try {
                 this.provinceList = await addressService.getAllProvice();
                 const res = await personService.getPersonbyID(this.$router.currentRoute.params.pID);
+                this.center = { lat: parseFloat(res.person_lat), lng: parseFloat(res.person_lng) }
                 this.person = {
                     idCard: res.id_card,
                     titlename: res.person_titlename,

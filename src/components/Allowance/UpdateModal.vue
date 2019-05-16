@@ -1,6 +1,6 @@
 <template>
     <el-dialog
-        title="ประวัติการเยี่ยมบ้าน"
+        title="ข้อมูลการรับเบี้ยยังชีพ"
         :visible.sync="centerDialogVisible"
         width="800px"
         center
@@ -9,14 +9,14 @@
             <el-form ref="form" :model="allowance" :rules="rules" label-width="130px" class="demo-form-inline">  
                 <el-row>
                     <el-col :span="12">
-                        <el-form-item label="ผู้รับการรักษา :" prop="id_card">
+                        <el-form-item label="ผู้รับเบี้ยยังชีพ :" prop="id_card">
                             <el-select filterable style="width: 100%" v-model="allowance.id_card">
                                 <el-option v-for="item in personlist" :key="item.id_card" :label="item.name" :value="item.id_card"></el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
-                        <el-form-item label="ประเภทเบี้ยเลี้ยง :" prop="type">
+                        <el-form-item label="ประเภทเบี้ยยังชีพ :" prop="type">
                             <el-select filterable style="width: 100%" v-model="allowance.type">
                                 <el-option label="ผู้สูงอายุ" :value="1"></el-option>
                                 <el-option label="ผู้พิการ" :value="2"></el-option>
@@ -32,7 +32,7 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
-                        <el-form-item label="ปีที่จ่ายเบี้ย :" prop="year">
+                        <el-form-item label="ปีที่จ่ายเบี้ยยังชีพ :" prop="year">
                             <el-input-number class="left-number" :max="9999" :controls="false" v-model="allowance.year" placeholder="ปีของเบี้ยเลี้ยง"></el-input-number>
                         </el-form-item>
                     </el-col>
@@ -113,7 +113,12 @@
                 try {
                     let res = await allowanceService.updateAllowance(req, this.id)
                     this.$emit("DoneUpdate")
-                    this.$emit("closeDialog")
+                    this.$alert(`บันทึกข้อมูลเรียบร้อยแล้ว`, 'สำเร็จ!', {
+                        type: 'success',
+                        confirmButtonText: 'ตกลง',
+                    }).then(_ => {
+                        this.$emit("closeDialog")
+                    })
                 } catch (error) {
                     this.$alert('มีบางอย่างผิดพลาด โปรดลองใหม่ในภายหลัง', 'บางอย่างผิดพลาด!', {
                         type: 'error',
