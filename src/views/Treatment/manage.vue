@@ -86,7 +86,7 @@
             <template slot-scope="item">
                 <el-row>
                     <el-col :span="24">
-                        <el-button @click="popToGmap(item.row.person_lat, item.row.person_lng)" type="primary" plain>
+                        <el-button @click="popToTreatmentFile(item.row.treatment_id)" type="primary" plain>
                             เอกสารประกอบ
                         </el-button>
                     </el-col>
@@ -96,7 +96,7 @@
         </el-table-column>
         <!-- <el-table-column>
         </el-table-column> -->
-        <!-- <el-table-column
+        <el-table-column
           label="ตัวเลือก"
           align="center"
           width="150"
@@ -104,26 +104,62 @@
           <template slot-scope="item">
             <el-row>
               <el-col :span="24">
-                <router-link :to="`/visiting/insert/${item.row.id_card}`">
-                  <el-button type="success" plain icon="el-icon-edit">
-                    แก้ไข
-                  </el-button>
-                </router-link>
+                <el-button @click="deleteTreatment(item.row.treatment_id)" type="danger" plain icon="el-icon-edit">
+                  ลบ
+                </el-button>
               </el-col>
             </el-row>
           </template>
-        </el-table-column> -->
+        </el-table-column>
       </el-table>
     </el-row>
     <el-row style="margin-top: 15px;">
         <el-pagination
             background
             layout="prev, pager, next"
-            :total="personList.length"
+            :total="tableLength"
             @current-change="onPageChange"    
         >
         </el-pagination>
     </el-row>
+    <el-dialog
+            title="เอกสารประกอบการรักษา"
+            :visible.sync="isShowDialog"
+            width="500px"
+            center
+        >
+            <span>
+                <el-table
+                    :data="fileList"
+                    style="width: 100%"
+                >
+                    <el-table-column
+                        prop="file_name"
+                        label="ชื่อไฟล์">
+                    </el-table-column>
+                    <el-table-column
+                        label="เปิดไฟล์"
+                        align="center"
+                        width="180"
+                    >
+                         <template slot-scope="item">
+                            <el-row>
+                                <el-col :span="24">
+                                    <a :href="item.row.file_path" target="_blank" rel="noopener noreferrer">
+                                        <el-button plain>
+                                            เปิดไฟล์
+                                        </el-button>
+                                    </a>
+                                </el-col>
+                            </el-row>
+                        </template>
+                    </el-table-column>
+                </el-table>
+            </span>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="isShowDialog = false">Cancel</el-button>
+            </span>
+        </el-dialog>
 	<HistoryModal v-if="historyModalVisible" @closeDialog="historyModalVisible = false" :userInfo="userInfo" />
   </div>
 </template>
@@ -139,12 +175,15 @@
         },
         data() {
             return {
+              isShowDialog: false,
               searchtext: '',
               currentPage: 0,
+              tableLength: 0,
 					    historyModalVisible: false,
               userInfo: {},
               personList: [],
               userPosition: [],
+              fileList: [],
               userStatus: [
                 { id: 0, name: 'ผู้ดูแลระบบ' },
                 { id: 1, name: 'ผู้ใช้งานระบบ' },
@@ -153,34 +192,66 @@
         },
         async created() {
             this.personList = await treatmentService.getAllTreatment(this.currentPage, 10, this.searchtext);
+            this.tableLength = Number((await treatmentService.getLength()).length)
             console.log(this.personList)
         },
         methods: {
-            popToGmap (lat, lng) {
-                navigator.geolocation.getCurrentPosition(pos => {
-                    window.open(`https://www.google.com/maps/dir/${pos.coords.latitude},${pos.coords.longitude}/${lat},${lng}/@${lat},${lng}z?`)
-                })
-            },
-            onPageChange(page) {
-                this.currentPage = page - 1;
-                this.fetchChange();
-            },
-            serachingData() {
-              this.currentPage = 0;
+          async popToTreatmentFile (id) {
+              try {
+                  this.isLoading = true
+                  this.fileList = await treatmentService.getFileInTreatment(id)
+                  console.log(this.fileList)
+                  this.isShowDialog = true
+                  this.isLoading = false
+              } catch (error) {
+                  this.$alert('มีบางอย่างผิดพลาด โปรดลองใหม่ในภายหลัง', 'บางอย่างผิดพลาด!', {
+                      type: 'error',
+                      confirmButtonText: 'ตกลง',
+                  })
+                  this.isShowDialog = true
+                  this.isLoading = false
+              }
+          },
+          async deleteTreatment (id) {
+              this.$confirm(`โปรดตรวจสอบให้แน่ใจอีกครั้งข้อมูลจะไม่สามารถกูคืนได้`,
+                'โปรดตรวจสอบ!', {
+                type: 'warning',
+                confirmButtonText: 'ตกลง',
+              }).then(async () => {
+                try {
+                  const res = await treatmentService.removetreatment(id);
+                  this.$alert(`ลบข้อมูลเรียบร้อยแล้ว`, 'ลบข้อมูลสำเร็จแล้ว', {
+                    type: 'success',
+                  });
+                  this.fetchChange();
+                } catch (error) {
+                  this.$alert('มีบางอย่างผิดพลาด โปรดลองใหม่ในภายหลัง', 'บางอย่างผิดพลาด!', {
+                    type: 'error',
+                    confirmButtonText: 'ตกลง',
+                  });
+                }
+              });
+          },
+          onPageChange(page) {
+              this.currentPage = page - 1;
               this.fetchChange();
-            },
-            async fetchChange() {
-                this.personList = await treatmentService.getAllPerson(this.currentPage, 10, this.searchtext);
-            },
-            async visit_history_modal(id_card) {
-				this.userInfo = {
-					id_card: id_card
-				}
-				this.historyModalVisible = true
-            },
-            momentDate(date) {
-                return date !== '0000-00-00' ? moment(date).format('DD/MM/YYYY') : 'ไม่ได้บันทึกวันเกิด';
-            },
+          },
+          serachingData() {
+            this.currentPage = 0;
+            this.fetchChange();
+          },
+          async fetchChange() {
+              this.personList = await treatmentService.getAllTreatment(this.currentPage, 10, this.searchtext);
+          },
+          async visit_history_modal(id_card) {
+            this.userInfo = {
+              id_card: id_card
+            }
+            this.historyModalVisible = true
+          },
+          momentDate(date) {
+              return date !== '0000-00-00' ? moment(date).format('DD/MM/YYYY') : 'ไม่ได้บันทึกวันเกิด';
+          },
         },
     };
 </script>

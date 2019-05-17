@@ -157,7 +157,9 @@
                 req.append("weigth", this.treatment.weigth)
                 req.append("SBP", this.treatment.SBP)
                 req.append("DBP", this.treatment.DBP)
-                req.append("files[]", this.treatment.files)
+                this.treatment.files.forEach(e => {
+                    req.append("files[]", e)
+                })
 
                 try {
                     treatmentService.addNewtreatment(req, this.treatment.id_card)

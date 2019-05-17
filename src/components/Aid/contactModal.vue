@@ -8,7 +8,7 @@
             :before-close="handleClose"
         >
             <span class="align-l">
-                <router-link to="/aid/contact/insert">
+                <router-link :to="`/aid/contact/insert/${this.patientInfo.patient_id}`">
                     <el-row>
                         <el-col class="align-r">
                             <el-button type="primary" plain>

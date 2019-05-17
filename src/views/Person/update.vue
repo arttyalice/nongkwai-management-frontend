@@ -218,7 +218,7 @@
                     ],
                     phone: [
                         { required: true, message: 'กรุณากรอกเบอร์โทร', trigger: 'blur' },
-                        { min: 9, max: 10, message: 'เบอร์โทรต้องยาว 9 - 10 หลัก', trigger: 'change' },
+                        { min: 10, max: 11, message: 'เบอร์โทรต้องยาว 9 - 10 หลัก', trigger: 'change' },
                     ],
                     birthDate: [
                         { required: true, message: 'กรุณากรอกวันเกิด', trigger: 'blur' },
@@ -228,7 +228,7 @@
                     ],
                     idCard: [
                         { required: true, message: 'กรุณากรอกรหัสบัตรประชาชน', trigger: 'blur' },
-                        { min: 13, max: 13, message: 'รหัสบัตรประชาชนต้องยาว 13 หลัก', trigger: 'change' },
+                        { min: 17, max: 17, message: 'รหัสบัตรประชาชนต้องยาว 13 หลัก', trigger: 'change' },
                     ],
                     titlename: [
                         { required: true, message: 'กรุณากรอกคำนำหน้าชื่อ', trigger: 'blur' },
@@ -423,7 +423,6 @@
                     }
                 }
                 const FormPerson = new FormData();
-                FormPerson.append('old_id_card', this.$router.currentRoute.params.pID);
                 FormPerson.append('person_titlename', this.person.titlename);
                 FormPerson.append('person_firstname', this.person.fname);
                 FormPerson.append('person_lastname', this.person.lname);
@@ -437,7 +436,7 @@
                 FormPerson.append('STDid', this.person.address.SDTid);
                 FormPerson.append('Did', this.person.address.Did);
                 FormPerson.append('Pid', this.person.address.Pid);
-                FormPerson.append('person_phone', this.person.phone);
+                FormPerson.append('person_phone', this.person.phone.replace('-', ''));
                 FormPerson.append('person_status', this.person.person_status);
                 FormPerson.append('person_lat', this.person.address.geo.lat);
                 FormPerson.append('person_lng', this.person.address.geo.lng);
@@ -445,7 +444,7 @@
                 FormPerson.append('old_person_type', JSON.stringify(this.person.old_type));
                 FormPerson.append('user_id', localStorage.getItem('admin_user_data'));
                 try {
-                    const res = await personService.updatePerson(FormPerson, this.person.idCard);
+                    const res = await personService.updatePerson(FormPerson, this.$router.currentRoute.params.pID);
                     this.$alert(
                         `บันทึกข้อมูลผู้ใช้ของ ${this.person.fname} ${this.person.lname} เรียบร้อยแล้ว`,
                         'สำเร็จ!',

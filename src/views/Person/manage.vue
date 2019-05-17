@@ -28,12 +28,12 @@
         <el-table-column
           prop="id_card"
           label="เลขบัตรประชาชน"
-          width="200"
+          width="140"
         >
         </el-table-column>
         <el-table-column
           label="ชื่อ-นามสกุล"
-          width="200"
+          width="180"
         >
           <template slot-scope="item">
             {{ `${item.row.person_titlename} ${item.row.person_firstname} ${item.row.person_lastname}` }}
@@ -42,14 +42,37 @@
         <el-table-column
           prop="person_phone"
           label="เบอร์โทรศัพท์"
-          width="200"
+          width="150"
         >
         </el-table-column>
         <el-table-column
           label="วัน/เดือน/ปี เกิด"
+          width="150"
         >
           <template slot-scope="item">
             {{ momentDate(item.row.person_birthday) }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="ประเภท"
+        >
+          <template slot-scope="item">
+            <el-tag style="margin:0 3px;" type="info" v-if="item.row.disability_id">พิการ</el-tag>
+            <el-tag style="margin:0 3px;" type="success" v-if="item.row.elders_id">สูงอายุ</el-tag>
+            <el-tag style="margin:0 3px;" type="warning" v-if="item.row.patient_id">เอดส์</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="ข้อมูล"
+          width="200"
+          align="center"
+        >
+          <template slot-scope="item">
+            <router-link :to="`/person/info/${item.row.id_card}`">
+              <el-button type="info" plain>
+                ข้อมูลทั้งหมด
+              </el-button>
+            </router-link>
           </template>
         </el-table-column>
         <el-table-column
@@ -126,6 +149,9 @@
             },
             async fetchChange() {
                 this.personList = await personService.getAllPerson(this.currentPage, 10, this.searchtext);
+            },
+            openPersonInfo (row) {
+              console.log(row)
             },
             async removePerson(row) {
                 this.$confirm(`โปรดตรวจสอบให้แน่ใจอีกครั้งข้อมูลของ ${row.person_firstname} ${row.person_lastname} จะไม่สามารถกูคืนได้`,

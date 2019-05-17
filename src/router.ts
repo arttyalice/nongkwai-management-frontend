@@ -6,6 +6,7 @@ import Home from './views/Home.vue';
 import User from './views/User.vue';
 // Person Components
 import Person from './views/Person/index.vue';
+import PersonInfo from './views/Person/info.vue';
 import ManagePerson from './views/Person/manage.vue';
 import InsertPerson from './views/Person/insert.vue';
 import UpdatePerson from './views/Person/update.vue';
@@ -13,6 +14,8 @@ import UpdatePerson from './views/Person/update.vue';
 import Aid from './views/Aids/index.vue';
 import ManageAid from './views/Aids/manage.vue';
 import UpdateAid from './views/Aids/update.vue';
+import ContactInsert from './views/Aids/contact/insert.vue';
+import ContactUpdate from './views/Aids/contact/update.vue';
 // Elder Components
 import Elder from './views/Elders/index.vue';
 import ManageElder from './views/Elders/manage.vue';
@@ -54,6 +57,7 @@ export default new Router({
       component: Person,
       children: [
         { path: '', component: ManagePerson },
+        { path: 'info/:pID', component: PersonInfo },
         { path: 'insert', component: InsertPerson },
         { path: 'update/:pID', component: UpdatePerson },
       ]
@@ -72,6 +76,8 @@ export default new Router({
       children: [
         { path: '', component: ManageAid },
         { path: 'update/:pID', component: UpdateAid },
+        { path: 'contact/insert/:ptID', component: ContactInsert },
+        { path: 'contact/update/:ctID', component: ContactUpdate },
       ]
     },
     {
