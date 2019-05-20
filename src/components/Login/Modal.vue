@@ -43,6 +43,7 @@
                         });
                     } else {
                         localStorage.setItem('admin_user_data', JSON.stringify(res.data.user.user_id));
+                        this.$router.push('/')
                         this.$emit('logInSuccess');
                     }
                 } catch (error) {
