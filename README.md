@@ -5,6 +5,8 @@
 npm install
 ```
 
+in src/config/api.js you will see baseUrl. in this line you need to assign your api url to this. 
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve
