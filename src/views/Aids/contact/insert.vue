@@ -283,7 +283,7 @@
                 newPerson.append('SDTid', this.person.address.SDTid);
                 newPerson.append('Did', this.person.address.Did);
                 newPerson.append('Pid', this.person.address.Pid);
-                newPerson.append('contact_phone', this.person.phone.replace("-",""));
+                newPerson.append('contact_phone', this.person.phone.replace(/-/g,""));
                 newPerson.append('contact_relation', this.person.relation);
                 try {
                     let res = await contactService.createContact(newPerson);

@@ -391,7 +391,7 @@
                     }
                 }
                 const newPerson = new FormData();
-                newPerson.append('id_card', this.person.idCard.replace("-",""));
+                newPerson.append('id_card', this.person.idCard.replace(/-/g,""));
                 newPerson.append('person_titlename', this.person.titlename);
                 newPerson.append('person_firstname', this.person.fname);
                 newPerson.append('person_lastname', this.person.lname);
@@ -405,7 +405,7 @@
                 newPerson.append('STDid', this.person.address.SDTid);
                 newPerson.append('Did', this.person.address.Did);
                 newPerson.append('Pid', this.person.address.Pid);
-                newPerson.append('person_phone', this.person.phone.replace("-",""));
+                newPerson.append('person_phone', this.person.phone.replace(/-/g,""));
                 newPerson.append('person_status', this.person.person_status);
                 newPerson.append('person_lat', this.person.address.geo.lat);
                 newPerson.append('person_lng', this.person.address.geo.lng);

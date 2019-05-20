@@ -137,7 +137,7 @@
                 const newUser = new FormData();
                 newUser.append('first_name', this.user.fname);
                 newUser.append('last_name', this.user.lname);
-                newUser.append('phone', this.user.phone.replace("-",""));
+                newUser.append('phone', this.user.phone.replace(/-/g,""));
                 newUser.append('user_name', this.user.username);
                 newUser.append('user_pass', this.user.password);
                 newUser.append('position_id', this.user.position);

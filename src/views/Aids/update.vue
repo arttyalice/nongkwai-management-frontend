@@ -216,7 +216,7 @@
                 person: {},
             };
         },
-        async mounted () {
+        async created () {
             try {
                 const res = await aidService.getPersonbyID(this.$router.currentRoute.params.pID)
                 this.person = res
