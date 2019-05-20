@@ -11,6 +11,14 @@
                     width="150">
                 </el-table-column>
                 <el-table-column
+                    label="ผู้เยี่ยม"
+                    width="200"
+                >
+                    <template slot-scope="item">
+                        {{ `${item.row.staff_fname} ${item.row.staff_lname}` }}
+                    </template>
+                </el-table-column>
+                <el-table-column
                     prop="adl_summary"
                     label="ผลรวมคะแนน ADL"
                     align="center"
