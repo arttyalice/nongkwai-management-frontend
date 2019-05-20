@@ -157,16 +157,16 @@
                         <el-row>
                             <el-radio-group v-model="aid.get_money">
                                 <el-col :span="12">
-                                    <el-radio :value="1" label="รับเงินสดด้วยตนเอง" />
+                                    <el-radio :label="1">รับเงินสดด้วยตนเอง</el-radio>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-radio :value="2" label="รับเงินสดโดยบุคคลที่ได้รับมอบอำนาจจากผู้มีสิทธิ/ผู้ดูแล" />
+                                    <el-radio :label="2">รับเงินสดโดยบุคคลที่ได้รับมอบอำนาจจากผู้มีสิทธิ/ผู้ดูแล</el-radio>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-radio :value="3" label="โอนเข้าบัญชีเงินฝากธนาคารในนามผู้มีสิทธิ" />
+                                    <el-radio :label="3">โอนเข้าบัญชีเงินฝากธนาคารในนามผู้มีสิทธิ</el-radio>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-radio :value="4" label="โอนเข้าบัญชีเงินฝากธนาคารในนามบุคคลที่ได้รับมอบอำนาจจากผู้มีสิทธิ/ผู้ดูแล" />
+                                    <el-radio :label="4">โอนเข้าบัญชีเงินฝากธนาคารในนามบุคคลที่ได้รับมอบอำนาจจากผู้มีสิทธิ/ผู้ดูแล</el-radio>
                                 </el-col>
                             </el-radio-group>
                         </el-row>

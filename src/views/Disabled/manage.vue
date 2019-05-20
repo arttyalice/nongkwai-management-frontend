@@ -85,7 +85,7 @@
         <el-pagination
             background
             layout="prev, pager, next"
-            :total="disabledList.length"
+            :total="dataLength"
             @current-change="onPageChange"    
         >
         </el-pagination>
@@ -108,6 +108,7 @@
                     searchtext: '',
                     currentPage: 0,
                     updateModalVisible: false,
+                    dataLength: 0,
                     userInfo: {},
                     disabledList: [],
                     userPosition: [],
@@ -119,6 +120,7 @@
         },
         async created() {
             this.disabledList = await disabledService.getAllDisabled(this.currentPage, 10, this.searchtext);
+            this.dataLength = Number((await disabledService.getLength())['length'])
         },
         methods: {
             onPageChange(page) {

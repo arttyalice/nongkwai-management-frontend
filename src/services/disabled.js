@@ -1,6 +1,10 @@
 import { apiService } from '@/config/api.js'
 
 export default {
+    async getLength () {
+        let res = await apiService.get(`/disabled/get/length`);
+        return res.data;
+    },
     async getAllDisabled (page, size, search) {
         let res = await apiService.get(`/disabled/get/all?page=${page}&size=${size}&search=${search}`);
         return res.data;

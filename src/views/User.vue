@@ -68,7 +68,7 @@
         <el-pagination
             background
             layout="prev, pager, next"
-            :total="usersList.length"
+            :total="dataLength"
             @current-change="onPageChange"    
         >
         </el-pagination>
@@ -92,6 +92,7 @@
         searchtext: '',
         currentPage: 0,
         updateModalVisible: false,
+        dataLength: 0,
         userInfo: {},
         usersList: [],
         userPosition: [],
@@ -102,6 +103,7 @@
       };
     },
     async created() {
+      this.dataLength = Number((await userService.getLength())['length'])
       this.usersList = await userService.getAllUser(this.currentPage, 10, this.searchtext);
       this.userPosition = await userService.getUserPosition();
     },

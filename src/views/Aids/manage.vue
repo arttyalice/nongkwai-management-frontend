@@ -88,7 +88,7 @@
         <el-pagination
             background
             layout="prev, pager, next"
-            :total="aidsList.length"
+            :total="dataLength"
             @current-change="onPageChange"    
         >
         </el-pagination>
@@ -114,6 +114,7 @@
             return {
                     searchtext: '',
                     currentPage: 0,
+                    dataLength: 0,
                     aidsList: [],
                     userPosition: [],
                     userStatus: [
@@ -127,6 +128,7 @@
         },
         async created() {
             this.aidsList = await aidService.getAllAids(this.currentPage, 10, '');
+            this.dataLength = Number((await aidService.getLength())['length'])
         },
         methods: {
             onPageChange(page) {

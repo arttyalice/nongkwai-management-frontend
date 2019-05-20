@@ -84,7 +84,7 @@
         <el-pagination
             background
             layout="prev, pager, next"
-            :total="personList.length"
+            :total="dataLength"
             @current-change="onPageChange"    
         >
         </el-pagination>
@@ -111,6 +111,7 @@
                     insertModalVisible: false,
                     updateModalVisible: false,
                     allowanceID: null,
+                    dataLength: 0,
                     personList: [],
                     userPosition: [],
                     userStatus: [
@@ -122,6 +123,7 @@
         async created() {
             try {
                 this.personList = await allowanceService.getAllPersonWithTypeAndAllowance(this.currentPage, 10, '');
+                this.dataLength = Number((await allowanceService.getLength())['length'])
             } catch (error) {
                 console.log(error)
                 this.$alert('มีบางอย่างผิดพลาด โปรดลองใหม่ในภายหลัง', 'บางอย่างผิดพลาด!', {

@@ -1,6 +1,10 @@
 import { apiService } from '@/config/api.js'
 
 export default {
+    async getLength () {
+        let res = await apiService.get(`/contact/get/length`);
+        return res.data;
+    },
     async getContactbyPatientID (pID) {
         let res = await apiService.get(`/contact/get/patient/${pID}`);
         return res.data;

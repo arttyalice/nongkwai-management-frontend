@@ -1,6 +1,10 @@
 import { apiService } from '@/config/api.js'
 
 export default {
+    async getLength () {
+        let res = await apiService.get(`/allowance/get/length`);
+        return res.data;
+    },
     async getAllPersonWithTypeAndAllowance (page, size, search) {
         let res = await apiService.get(`/allowance/get/all?page=${page}&size=${size}&search=${search}`)
         return res.data
