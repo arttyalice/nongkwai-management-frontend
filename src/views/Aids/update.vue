@@ -236,7 +236,7 @@
                     incomeDetail: res.patient_incomeDetail,
                     expense: res.patient_expensesSum,
                     expenseDetail: res.patient_expensesDetail,
-                    get_money: res.getmoney_id
+                    get_money: Number(res.getmoney_id)
                 }
             } catch (error) {
                 this.$alert('มีบางอย่างผิดพลาด โปรดลองใหม่ในภายหลัง', 'บางอย่างผิดพลาด!', {
