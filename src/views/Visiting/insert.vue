@@ -36,7 +36,7 @@
         <el-form ref="form" :model="visit" :rules="rules" label-width="" class="demo-form-inline">  
             <!-- Address -->
             <el-row>
-                <h2>แบบประเมินการเยี่ยมบ้าน</h2>
+                <h2>แบบประเมิน Barthel Activity of Daily Living Scale (ADL)</h2>
             </el-row>
 
             <span style="text-align: left;">

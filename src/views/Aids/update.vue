@@ -111,7 +111,7 @@
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="ระยะเวลาป่วย(ปี): " prop="text" style="align: left;">
-                        <el-input-number style="width: 100%;" class="left-number" :controls="false" v-model="aid.sickYear" placeholder="ระยะเวลาป่วย"></el-input-number>
+                        <el-input-number v-mask="'####'" style="width: 100%;" class="left-number" :controls="false" v-model="aid.sick" placeholder="ระยะเวลาป่วย"></el-input-number>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
@@ -123,14 +123,14 @@
             <el-row>
                 <el-col :span="12">
                     <el-form-item label-width="200px" label="การช่วยเหลือจากหน่วยงาน: " prop="text" style="align: left;">
-                        <el-input-number style="width: 100%;" class="left-number" :controls="false" v-model="aid.assist" placeholder="การช่วยเหลือของหน่วยงานอื่นๆ"></el-input-number>
+                        <el-input style="width: 100%;" v-model="aid.assist" placeholder="การช่วยเหลือของหน่วยงานอื่นๆ"></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="รายได้(เดือน): " prop="text" style="align: left;">
-                        <el-input-number style="width: 100%;" class="left-number" :controls="false" v-model="aid.income" placeholder="ระยะเวลาป่วย"></el-input-number>
+                        <el-input type="number" style="width: 100%;" v-model="aid.income" placeholder="รายได้"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
@@ -142,12 +142,12 @@
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="รายจ่าย(เดือน): " prop="text" style="align: left;">
-                        <el-input-number style="width: 100%;" class="left-number" :controls="false" v-model="aid.expense" placeholder="ระยะเวลาป่วย"></el-input-number>
+                        <el-input type="number" style="width: 100%;" v-model="aid.expense" placeholder="รายจ่าย"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="สาเหตุ: " prop="text" style="align: left;">
-                        <el-input v-model="aid.expense" placeholder="ค่าอาหาร, เดินทาง, รักษา"></el-input>
+                        <el-input v-model="aid.expenseDetail" placeholder="ค่าอาหาร, เดินทาง, รักษา"></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -216,7 +216,7 @@
                 person: {},
             };
         },
-        async created () {
+        async mounted () {
             try {
                 const res = await aidService.getPersonbyID(this.$router.currentRoute.params.pID)
                 this.person = res
@@ -268,6 +268,9 @@
                     get_money: null
                 };
             },
+            moneyChange (e) {
+                console.log(e)
+            },
             async saveAidPerson() {
                 let valid = null
                 await this.$refs.form.validate(val => {
@@ -293,9 +296,9 @@
                 req.append('patient_sickyear', this.aid.sick);
                 req.append('patient_sysmptom', this.aid.sickDetail);
                 req.append('patient_assistance', this.aid.assist);
-                req.append('patient_incomeSum', this.aid.income);
+                req.append('patient_incomeSum', this.aid.income.replace(',', ''));
                 req.append('patient_incomeDetail', this.aid.incomeDetail);
-                req.append('patient_expensesSum', this.aid.expense);
+                req.append('patient_expensesSum', this.aid.expense.replace(',', ''));
                 req.append('patient_expensesDetail', this.aid.expenseDetail);
                 req.append('getmoney_id', this.aid.get_money);
                 req.append('user_id', localStorage.getItem('admin_user_data'));
@@ -319,9 +322,14 @@
 </script>
 
 <style lang="scss">
- .form-style {
-    .el-form-item__content {
-        text-align: left;
+    .form-style {
+        .el-form-item__content {
+            text-align: left;
+        }
     }
- }
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none; 
+        margin: 0; 
+    }
 </style>

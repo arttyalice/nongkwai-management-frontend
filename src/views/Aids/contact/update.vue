@@ -40,12 +40,12 @@
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="เบอร์โทร :" prop="phone">
-                        <el-input v-mask="'###-#######'" v-model="person.phone" placeholder="0812345678"></el-input>
+                        <el-input v-mask="'###-#######'" v-model="person.phone" placeholder="081-2345678"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="ความสัมพันธ์ :" prop="phone">
-                        <el-input v-model="person.relation" placeholder="0812345678"></el-input>
+                        <el-input v-model="person.relation" placeholder="ความสัมพันธ์"></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -193,7 +193,7 @@
         async created() {
             try {
                 this.provinceList = await addressService.getAllProvice();
-                const res = await contactService.getContactbyPatientID(this.$router.currentRoute.params.ctID)
+                const res = await contactService.getContactbyContactID(this.$router.currentRoute.params.ctID)
                 // {"contact_id":"30","contact_titlename":"นายสาว","contact_firstname":"เอก","contact_lastname":"เอก","contact_addNum":"1",
                 // "contact_addMoo":"1","contact_addSoi":"1","contact_addRoad":"1","contact_addVillage":"1","SDTid":"100304","Did":"3",
                 // "Pid":"1","contact_phone":"0899999999","contact_relation":"อิอิอิ","patient_id":"9"}

@@ -60,7 +60,7 @@
                     ],
                     phone: [
                         { required: true, message: 'กรุณากรอกเบอร์โทร', trigger: 'blur', },
-                        { min: 9, max: 10, message: 'เบอร์โทรต้องยาว 9 - 10 หลัก', trigger: 'blur' },
+                        { min: 10, max: 11, message: 'เบอร์โทรต้องยาว 9 - 10 หลัก', trigger: 'blur' },
                     ],
                     username: [
                         { required: true, message: 'กรุณากรอกชื่อผู้ใช้', trigger: 'blur', },

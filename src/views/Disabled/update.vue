@@ -138,29 +138,12 @@
         },
         methods: {
             reset() {
-                this.person = {
-                    idCard: '',
-                    titlename: '',
-                    fname: '',
-                    lname: '',
-                    phone: '',
-                    birthDate: '',
-                    nationality: '',
-                    person_status: '',
-                    address: {
-                        num: '',
-                        moo: '',
-                        soi: '',
-                        road: '',
-                        village: '',
-                        Pid: null,
-                        Did: null,
-                        SDTid: null,
-                        geo: {
-                            lat: null,
-                            lng: null,
-                        },
-                    },
+                this.disability = {
+                    id: null,
+                    type: '',
+                    info: '',
+                    detail: '',
+                    getmoney_method: null
                 };
             },
             async saveUpdatePerson() {

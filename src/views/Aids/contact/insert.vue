@@ -40,12 +40,12 @@
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="เบอร์โทร :" prop="phone">
-                        <el-input v-mask="'###-#######'" v-model="person.phone" placeholder="0812345678"></el-input>
+                        <el-input v-mask="'###-#######'" v-model="person.phone" placeholder="081-2345678"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="ความสัมพันธ์ :" prop="phone">
-                        <el-input v-model="person.relation" placeholder="0812345678"></el-input>
+                        <el-input v-model="person.relation" placeholder="ความสัมพันธ์"></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>

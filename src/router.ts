@@ -34,6 +34,7 @@ import UpdateVisiting from './views/Visiting/update.vue';
 import Treatment from './views/Treatment/index.vue'
 import ManageTreatment from './views/Treatment/manage.vue'
 import InsertTreatment from './views/Treatment/insert.vue'
+import UpdateTreatment from './views/Treatment/update.vue'
 // Allowance Component
 import Allowance from './views/Allowance.vue'
 
@@ -104,6 +105,7 @@ export default new Router({
       children: [
         { path: '', component: ManageTreatment },
         { path: 'insert', component: InsertTreatment },
+        { path: 'update/:tmID', component: UpdateTreatment },
       ]
     },
     {

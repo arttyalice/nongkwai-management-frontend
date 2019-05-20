@@ -40,12 +40,12 @@
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="บัตรประชาชน :" prop="idCard">
-                        <el-input v-mask="'#-####-#####-##-#'" placeholder="1239900123003" v-model="person.idCard"></el-input>
+                        <el-input v-mask="'#-####-#####-##-#'" placeholder="1-2399-00123-00-3" v-model="person.idCard"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="สถานะ :" prop="person_status">
-                        <el-select filterable style="width: 100%;" @change="onProvinceChange" v-model="person.person_status">
+                        <el-select filterable style="width: 100%;" v-model="person.person_status">
                             <el-option label="มีชีวิตอยู่" value="มีชีวิตอยู่"></el-option>
                             <el-option label="ถึงแก่กรรม" value="ถึงแก่กรรม"></el-option>
                             <el-option label="ย้ายที่อยู่" value="ย้ายที่อยู่"></el-option>
@@ -78,10 +78,10 @@
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="เบอร์โทร :" prop="phone">
-                        <el-input v-mask="'###-#######'" placeholder="0812345678" v-model="person.phone"></el-input>
+                        <el-input v-mask="'###-#######'" placeholder="081-2345678" v-model="person.phone"></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col :span="12">
+                <!-- <el-col :span="12">
                     <el-form-item label="ประเภท :" prop="type">
                         <el-select style="width: 100%;" v-model="person.type" multiple placeholder="เลือกประเภท">
                             <el-option label="ผู้ป่วยโรคเอดส์" :value="1"></el-option>
@@ -89,7 +89,7 @@
                             <el-option label="ผู้สูงอายุ" :value="3"></el-option>
                         </el-select>
                     </el-form-item>
-                </el-col>
+                </el-col> -->
             </el-row>
 
             <!-- Address -->
@@ -211,58 +211,61 @@
                 center: { lat: 18.796143, lng: 98.979263 },
                 rules: {
                     fname: [
-                        { required: true, message: 'กรุณากรอกชื่อจริง', trigger: 'blur' },
+                        { required: true, message: 'กรุณากรอกชื่อจริง', trigger: 'change', },
                     ],
                     lname: [
-                        { required: true, message: 'กรุณากรอกนามสกุล', trigger: 'blur' },
+                        { required: true, message: 'กรุณากรอกนามสกุล', trigger: 'change', },
                     ],
                     phone: [
-                        { required: true, message: 'กรุณากรอกเบอร์โทร', trigger: 'blur' },
+                        { required: true, message: 'กรุณากรอกเบอร์โทร', trigger: 'change', },
                         { min: 10, max: 11, message: 'เบอร์โทรต้องยาว 9 - 10 หลัก', trigger: 'change' },
                     ],
+                    type: [
+                        { required: true, message: 'กรุราเลือกประเภท', trigger: 'change', },
+                    ],
                     birthDate: [
-                        { required: true, message: 'กรุณากรอกวันเกิด', trigger: 'blur' },
+                        { required: true, message: 'กรุณากรอกวันเกิด', trigger: 'change', },
                     ],
                     nationality: [
-                        { required: true, message: 'กรุณากรอกสัญชาติ', trigger: 'blur' },
+                        { required: true, message: 'กรุณากรอกสัญชาติ', trigger: 'change', },
                     ],
                     idCard: [
-                        { required: true, message: 'กรุณากรอกรหัสบัตรประชาชน', trigger: 'blur' },
+                        { required: true, message: 'กรุณากรอกรหัสบัตรประชาชน', trigger: 'change', },
                         { min: 17, max: 17, message: 'รหัสบัตรประชาชนต้องยาว 13 หลัก', trigger: 'change' },
                     ],
                     titlename: [
-                        { required: true, message: 'กรุณากรอกคำนำหน้าชื่อ', trigger: 'blur' },
+                        { required: true, message: 'กรุณากรอกคำนำหน้าชื่อ', trigger: 'change', },
                     ],
                     person_status: [
-                        { required: true, message: 'กรุณากรอกสถานะความเป็นอยู่', trigger: 'blur' },
+                        { required: true, message: 'กรุณากรอกสถานะความเป็นอยู่', trigger: 'change', },
                     ],
                     type: [
-                        { required: true, message: 'กรุณากรอกสถานะความเป็นอยู่', trigger: 'change' },
+                        { required: true, message: 'กรุณากเลือกประเภท', trigger: 'change', },
                     ],
                     address: {
                         num: [
-                            { required: true, message: 'กรุณากรอกเลขที่บ้าน', trigger: 'blur' },
+                            { required: true, message: 'กรุณากรอกเลขที่บ้าน', trigger: 'change', },
                         ],
                         moo: [
-                            { required: true, message: 'กรุณากรอกเลขที่หมู่', trigger: 'blur' },
+                            { required: true, message: 'กรุณากรอกเลขที่หมู่', trigger: 'change', },
                         ],
                         soi: [
-                            { required: true, message: 'กรุณากรอกซอย', trigger: 'blur' },
+                            { required: true, message: 'กรุณากรอกซอย', trigger: 'change', },
                         ],
                         road: [
-                            { required: true, message: 'กรุณากรอกชื่อถนน', trigger: 'blur' },
+                            { required: true, message: 'กรุณากรอกชื่อถนน', trigger: 'change', },
                         ],
                         village: [
-                            { required: true, message: 'กรุณากรอกชื่อหมู่บ้าน', trigger: 'blur' },
+                            { required: true, message: 'กรุณากรอกชื่อหมู่บ้าน', trigger: 'change', },
                         ],
                         Pid: [
-                            { required: true, message: 'กรุณาเลือกจังหวัด', trigger: 'change' },
+                            { required: true, message: 'กรุณาเลือกจังหวัด', trigger: 'change', },
                         ],
                         Did: [
-                            { required: true, message: 'กรุณาเลือกอำเภอ', trigger: 'change' },
+                            { required: true, message: 'กรุณาเลือกอำเภอ', trigger: 'change', },
                         ],
                         SDTid: [
-                            { required: true, message: 'กรุณาเลือกตำบล', trigger: 'change' },
+                            { required: true, message: 'กรุณาเลือกตำบล', trigger: 'change', },
                         ],
                     },
                 },

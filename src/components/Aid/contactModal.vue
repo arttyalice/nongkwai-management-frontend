@@ -94,7 +94,6 @@
             };
         },
         async created () {
-            console.log(this.patientInfo)
             this.contacts = await contactService.getContactbyPatientID(this.patientInfo.patient_id);
         },
         methods: {

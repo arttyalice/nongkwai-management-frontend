@@ -9,8 +9,8 @@ export default {
         let res = await apiService.get(`/treatment/get/all?page=${page}&size=${size}&search=${search}`);
         return res.data;
     },
-    async gettreatmentbyID (pID) {
-        let res = await apiService.get(`/treatment/get/one/${pID}`);
+    async gettreatmentbyID (tmID) {
+        let res = await apiService.get(`/treatment/get/one/${tmID}`);
         return res.data;
     },
     async getTreatmentbyPerson (pID) {
@@ -29,8 +29,8 @@ export default {
         let res = await apiService.post('/treatment/delete/' + tmID);
         return res
     },
-    async updatetreatment (req, pID) {
-        let res = await apiService.post('/treatment/update/' + pID, req);
+    async updatetreatment (req, tmID) {
+        let res = await apiService.post('/treatment/update/' + tmID, req);
         return res
     }
 }

@@ -18,7 +18,7 @@
             <el-col><h2>{{ ` ผลการประเมิน ADL ของ ${summary.title} ${summary.fname} ${summary.lname}` }}</h2></el-col>
         </el-row>
         <el-row style="font-size: 24px;">
-            <el-col>{{ `ผลการประเมิณของวันที่ ${thaidatetime(summary.created_date)} ได้ทั้งหมด` }} <b>{{summary.score}}</b> {{ `คะแนน` }}</el-col>
+            <el-col>{{ `ผลการประเมินของวันที่ ${thaidatetime(summary.created_date)} ได้ทั้งหมด` }} <b>{{summary.score}}</b> {{ `คะแนน` }}</el-col>
         </el-row>
         <el-row>
             <el-col><h3>{{ `ถูกจัดอยู่ในกลุ่ม` }}</h3></el-col>

@@ -41,10 +41,12 @@
         </el-table-column>
         <el-table-column
           label="ประเภทเบี้ยยังชีพ"
-          width="130"
+          width="160"
         >
           <template slot-scope="item">
-            {{ `${item.row.allowance_type}` }}
+            <span v-if="Number(item.row.allowance_type) === 1">เบี้ยผู้สูงอายุ</span>
+            <span v-if="Number(item.row.allowance_type) === 2">เบี้ยผู้พิการ</span>
+            <span v-if="Number(item.row.allowance_type) === 3">เบี้ยผู้ป่วยโรคเอดส์</span>
           </template>
         </el-table-column>
         <el-table-column

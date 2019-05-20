@@ -32,6 +32,9 @@
                 <el-tab-pane label="การประเมิณ" name="5">
                     <personVisit @DoneLoading="isLoading = false" :id_card="person.id_card" v-if="tabSelect === '5'" />
                 </el-tab-pane>
+                <el-tab-pane label="เบี้ยยังชีพ" name="6">
+                    <personAllowance @DoneLoading="isLoading = false" :id_card="person.id_card" v-if="tabSelect === '6'" />
+                </el-tab-pane>
             </el-tabs>
         </el-row>
         <el-row v-loading.fullscreen.lock="isLoading" ></el-row>
@@ -47,6 +50,7 @@
     import personElder from '@/components/Person/elder';
     import personTreatment from '@/components/Person/treatment';
     import personVisit from '@/components/Person/visiting';
+    import personAllowance from '@/components/Person/allowance';
 
     export default {
         components: {
@@ -55,7 +59,8 @@
             personDisable,
             personElder,
             personTreatment,
-            personVisit
+            personVisit,
+            personAllowance
         },
         data () {
             return {

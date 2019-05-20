@@ -5,7 +5,7 @@ export default {
         let res = await apiService.get(`/contact/get/patient/${pID}`);
         return res.data;
     },
-    async getContactbyPatientID (ctID) {
+    async getContactbyContactID (ctID) {
         let res = await apiService.get(`contact/get/one/${ctID}`);
         return res.data;
     },

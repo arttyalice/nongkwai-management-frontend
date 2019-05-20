@@ -3,7 +3,7 @@
     <span>
         <el-row>
             <el-col class="align-l" :span="12">
-                <h2>เพิ่มข้อมูลคน</h2>
+                <h2>เพิ่มข้อมูลประชากร</h2>
             </el-col>
             <el-col class="align-r" :span="12">
                 <router-link to="/person">
@@ -40,7 +40,7 @@
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="บัตรประชาชน :" prop="idCard">
-                        <el-input placeholder="1239900123003" v-model="person.idCard"></el-input>
+                        <el-input v-mask="'#-####-#####-##-#'"  placeholder="1-2399-00123-00-3" v-model="person.idCard"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
@@ -78,7 +78,7 @@
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="เบอร์โทร :" prop="phone">
-                        <el-input v-mask="'###-#######'" v-model="person.phone" placeholder="0812345678"></el-input>
+                        <el-input v-mask="'###-#######'" v-model="person.phone" placeholder="081-2345678"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">

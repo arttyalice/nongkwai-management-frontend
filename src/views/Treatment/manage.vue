@@ -82,6 +82,7 @@
         <el-table-column
             label="ข้อมูล"
             align="center"
+            min-width="160"
         >
             <template slot-scope="item">
                 <el-row>
@@ -99,11 +100,18 @@
         <el-table-column
           label="ตัวเลือก"
           align="center"
-          width="150"
+          width="250"
         >
           <template slot-scope="item">
             <el-row>
-              <el-col :span="24">
+              <el-col :span="12">
+                <router-link :to="`/treatment/update/${item.row.treatment_id}`">
+                  <el-button type="success" plain icon="el-icon-edit">
+                    แก้ไข
+                  </el-button>
+                </router-link>
+              </el-col>
+              <el-col :span="12">
                 <el-button @click="deleteTreatment(item.row.treatment_id)" type="danger" plain icon="el-icon-edit">
                   ลบ
                 </el-button>
@@ -193,7 +201,6 @@
         async created() {
             this.personList = await treatmentService.getAllTreatment(this.currentPage, 10, this.searchtext);
             this.tableLength = Number((await treatmentService.getLength()).length)
-            console.log(this.personList)
         },
         methods: {
           async popToTreatmentFile (id) {
