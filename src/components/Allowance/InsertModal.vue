@@ -30,12 +30,7 @@
                         <el-form-item label="จำนวนเงิน :" prop="amount">
                             <el-input type="number" v-model="allowance.amount" placeholder="จำนวนเงิน"></el-input>
                         </el-form-item>
-                    </el-col>
-                    <el-col :span="12">
-                        <el-form-item label="ปีที่จ่ายเบี้ยยังชีพ :" prop="year">
-                            <el-input v-mask="'####'" v-model="allowance.year" placeholder="ปีของเบี้ยเลี้ยง"></el-input>
-                        </el-form-item>
-                    </el-col>
+                    </el-col>   
                 </el-row>
             </el-form>
         </span>

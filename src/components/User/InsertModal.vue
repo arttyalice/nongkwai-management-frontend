@@ -41,8 +41,8 @@
                 </el-form>
             </span>
             <span slot="footer" class="dialog-footer">
-                <el-button @click="handleClose">Cancel</el-button>
-                <el-button type="primary" @click="saveNewUser">Confirm</el-button>
+                <el-button @click="handleClose">ยกเลิก</el-button>
+                <el-button type="primary" @click="saveNewUser">บันทึก</el-button>
             </span>
         </el-dialog>
     </span>

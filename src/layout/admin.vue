@@ -17,22 +17,30 @@
       </el-menu>
     </el-aside>
     
-    <el-container>
-      <el-header style="font-size: 18px">
-        <el-row>
-          <el-col :span="12" style="text-align: left;">
-            <el-button className="menu-button" @click="isCollapse = !isCollapse" icon="el-icon-more" circle>
-            </el-button>
-          </el-col>
-          <el-col :span="12" style="text-align: right;"><span @click="userLogout">Admin</span></el-col>
-        </el-row>
-      </el-header>
-      
-      <el-main>
-        <slot></slot>
-      </el-main>
+      <el-container>
+          <el-header class="employee" style="font-size: 18px">
+            <el-row>
+                <el-col :span="12" style="text-align: left;">
+                  <el-button className="menu-button" @click="isCollapse = !isCollapse" icon="el-icon-more" circle>
+                  </el-button>
+                </el-col>
+                <el-col :span="12" style="text-align: right;">
+                  <el-popover
+                    placement="bottom"  
+                    trigger="click"
+                  >
+                    <el-button style="width: 100%;" @click="userLogout">ออกจากระบบ</el-button>
+                    <el-button type="primary" slot="reference">{{ `${user.fistname} ${user.lastname}` }}</el-button>
+                  </el-popover>
+                </el-col>
+            </el-row>
+          </el-header>
+          
+          <el-main>
+              <slot></slot>
+          </el-main>
+      </el-container>
     </el-container>
-  </el-container>
 </template>
 
 <script>

@@ -5,7 +5,12 @@
         <AdminDrawer v-if="Number(user.position_id) === 4" :user="user" @logOutSuccess="checkIsUserLogin" >
           <router-view/>
         </AdminDrawer>
-        <!-- <EmployeeDrawer v-if="Number(user.position_id) === 3" :user="user" @logOutSuccess="checkIsUserLogin" > -->
+        <ManagerDrawer v-if="Number(user.position_id) === 2" :user="user" @logOutSuccess="checkIsUserLogin" >
+          <router-view/>
+        </ManagerDrawer>
+        <DirectorDrawer v-if="Number(user.position_id) === 1" :user="user" @logOutSuccess="checkIsUserLogin" >
+          <router-view/>
+        </DirectorDrawer>
         <EmployeeDrawer v-else :user="user" @logOutSuccess="checkIsUserLogin" >
           <router-view/>
         </EmployeeDrawer>
@@ -23,12 +28,16 @@
   import { Loading } from 'element-ui';
   import AdminDrawer from '@/layout/admin.vue';
   import EmployeeDrawer from '@/layout/employee.vue';
+  import ManagerDrawer from '@/layout/manager.vue';
+  import DirectorDrawer from '@/layout/director.vue';
   import LoginModal from '@/components/Login/Modal.vue';
 
   export default{
     components: {
       AdminDrawer,
       EmployeeDrawer,
+      ManagerDrawer,
+      DirectorDrawer,
       LoginModal,
     },
     data() {
@@ -66,17 +75,21 @@
 </script>
 
 <style lang="scss">
+  @import url('https://fonts.googleapis.com/css?family=Kanit:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=thai');
+  
   html, body {
     padding: 0;
     margin: 0;
   }
+  
   #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    font-family: 'Kanit', Helvetica, Arial, sans-serif!important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
   }
+  
   .margin-t-md {
     margin-top: 15px;
   }

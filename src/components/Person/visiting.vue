@@ -84,7 +84,7 @@
                 </el-table>
             </span>
             <span slot="footer" class="dialog-footer">
-                <el-button @click="isShowDialog = false">Cancel</el-button>
+                <el-button @click="isShowDialog = false">ยกเลิก</el-button>
             </span>
         </el-dialog>
     </span>

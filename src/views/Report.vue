@@ -5,12 +5,49 @@
         จัดการข้อมูลเบี้ยยังชีพ
       </el-col>
       <el-col :span="12" class="align-r">
-        <el-button type="primary" plain @click="insertModalVisible = true">
-            เพิ่มข้อมูลเบี้ยยังชีพ
+        <el-button type="primary" plain @click="allowanceReport">
+            ออกรายงาน
         </el-button>
       </el-col>
     </el-row>
     <el-row>
+        <el-col :span="2" style="line-height: 38px;">
+            {{ 'รับเมื่อ' }}
+        </el-col>
+        <el-col :span="5">
+            <el-date-picker
+                style="width: 100%;"
+                v-model="fromDate"
+                :default-value="(() => {
+                    let d = new Date()
+                    let year = d.getFullYear() + 543
+                    return new Date(`${year}-01-01`)
+                })()"
+                type="date"
+                placeholder="เลือกวันเกิด">
+            </el-date-picker>
+        </el-col>
+        <el-col :span="1" style="line-height: 38px;">
+        {{ 'ถึง' }}
+        </el-col>
+        <el-col :span="5">
+            <el-date-picker
+                style="width: 100%;"
+                v-model="toDate"
+                :default-value="(() => {
+                    let d = new Date()
+                    let year = d.getFullYear() + 543
+                    return new Date(`${year}-01-01`)
+                })()"
+                type="date"
+                placeholder="เลือกวันเกิด">
+            </el-date-picker>
+        </el-col>
+        <el-col :span="2">
+            <el-button @click="fetchChange" style="margin-left: 5px;" type="primary" icon="el-icon-search">ค้นหา</el-button>
+        </el-col>
+    </el-row>
+    <el-row id="PrintTable"> 
       <el-table
         :data="personList"
         style="width: 100%"
@@ -18,12 +55,10 @@
         <el-table-column
           prop="id_card"
           label="เลขบัตรประชาชน"
-          width="130"
         >
         </el-table-column>
         <el-table-column
           label="ชื่อ-นามสกุล"
-          width="180"
         >
           <template slot-scope="item">
             {{ `${item.row.person_titlename} ${item.row.person_firstname} ${item.row.person_lastname}` }}
@@ -31,7 +66,6 @@
         </el-table-column>
         <el-table-column
           label="ประเภท"
-          width="200"
         >
           <template slot-scope="item">
             <el-tag style="margin:0 3px;" type="info" v-if="item.row.disability_id">พิการ</el-tag>
@@ -41,7 +75,6 @@
         </el-table-column>
         <el-table-column
           label="ประเภทเบี้ยยังชีพ"
-          width="160"
         >
           <template slot-scope="item">
             <span v-if="Number(item.row.allowance_type) === 1">เบี้ยผู้สูงอายุ</span>
@@ -52,7 +85,6 @@
         <el-table-column
           prop="allowance_date"
           label="ปีที่ได้รับเบี้ยยังชีพ"
-          width="150"
         >
           <template slot-scope="item">
             {{ dateConvert(item.row.allowance_date) }}
@@ -61,63 +93,35 @@
         <el-table-column
           prop="allowance_money"
           label="จำนวนเงิน"
-          width="130"
         >
-        </el-table-column>
-        <el-table-column>
-        </el-table-column>
-        <el-table-column
-          label="ตัวเลือก"
-          align="center"
-          width="150"
-        >
-          <template slot-scope="item">
-            <el-row>
-              <el-col :span="24">
-                <el-button @click="openUpdateModal(item.row.allowance_id)" type="success" plain icon="el-icon-edit">
-                    แก้ไข
-                </el-button>
-              </el-col>
-            </el-row>
-          </template>
         </el-table-column>
       </el-table>
+      <el-row>
+          <el-col class="align-l" style="margin-top: 15px;">
+              รวมค่าเบี้ยยังชีพทั้งหมด <strong>{{ summary }}</strong> บาท
+          </el-col>
+      </el-row>
     </el-row>
-    <el-row style="margin-top: 15px;">
-        <el-pagination
-            background
-            layout="prev, pager, next"
-            :total="dataLength"
-            @current-change="onPageChange"    
-        >
-        </el-pagination>
-    </el-row>
-	<InsertModal v-if="insertModalVisible" @closeDialog="insertModalVisible = false" @DoneInsert="fetchChange" />
-	<UpdateModal v-if="updateModalVisible" @closeDialog="updateModalVisible = false" @DoneUpdate="fetchChange" :id="allowanceID" />
   </div>
 </template>
 
 <script>
     import moment from 'moment';
     import allowanceService from '@/services/allowance';
-    import InsertModal from '@/components/Allowance/InsertModal';
-    import UpdateModal from '@/components/Allowance/UpdateModal';
 
     export default {
-        components: {
-            InsertModal,
-            UpdateModal
-        },
         data() {
             return {
-                    currentPage: 0,
-                    insertModalVisible: false,
-                    updateModalVisible: false,
-                    allowanceID: null,
-                    dataLength: 0,
-                    personList: [],
-                    userPosition: [],
-                    userStatus: [
+                fromDate: '',
+                toDate: '',
+                summary: 0,
+                insertModalVisible: false,
+                updateModalVisible: false,
+                allowanceID: null,
+                dataLength: 0,
+                personList: [],
+                userPosition: [],
+                userStatus: [
                     { id: 0, name: 'ผู้ดูแลระบบ' },
                     { id: 1, name: 'ผู้ใช้งานระบบ' },
                 ],
@@ -125,8 +129,12 @@
         },
         async created() {
             try {
-                this.personList = await allowanceService.getAllPersonWithTypeAndAllowance(this.currentPage, 10, '');
+                this.personList = await allowanceService.getAllPersonWithTypeAndAllowanceReport(this.fromDate, this.toDate);
                 this.dataLength = Number((await allowanceService.getLength())['length'])
+                this.summary = 0
+                this.personList.forEach(e => {
+                    this.summary += Number(e.allowance_money)
+                })
             } catch (error) {
                 console.log(error)
                 this.$alert('มีบางอย่างผิดพลาด โปรดลองใหม่ในภายหลัง', 'บางอย่างผิดพลาด!', {
@@ -136,12 +144,14 @@
             }
         },
         methods: {
-            onPageChange(page) {
-                this.currentPage = page - 1;
-                this.fetchChange();
-            },
             async fetchChange() {
-                this.personList = await allowanceService.getAllPersonWithTypeAndAllowance(this.currentPage, 10, '');
+                const from = this.fromDate ? moment(this.fromDate).add(-543, 'years').format('YYYY-MM-DD 00:00:00') : ''
+                const to = this.toDate ? moment(this.toDate).add(-543, 'years').format('YYYY-MM-DD 23:59;59') : ''
+                this.personList = await allowanceService.getAllPersonWithTypeAndAllowanceReport(from, to);
+                this.summary = 0
+                this.personList.forEach(e => {
+                    this.summary += Number(e.allowance_money)
+                })
             },
             openUpdateModal (alID) {
                 this.allowanceID = alID
@@ -152,6 +162,14 @@
             },
             dateConvert (date) {
               return moment(date).add(543, 'years').format('DD/MM/YYYY')
+            },
+            allowanceReport () {
+                // window.print()
+                const printcontent = document.getElementById('PrintTable')
+                const new_window = window.open()
+                new_window.document.write(printcontent.outerHTML)
+                new_window.print()
+                new_window.close()
             }
         },
     };

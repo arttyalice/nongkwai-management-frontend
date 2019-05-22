@@ -37,6 +37,8 @@ import InsertTreatment from './views/Treatment/insert.vue'
 import UpdateTreatment from './views/Treatment/update.vue'
 // Allowance Component
 import Allowance from './views/Allowance.vue'
+// ReportAllowance Component
+import ReportAllowance from './views/Report.vue'
 
 
 Vue.use(Router);
@@ -111,6 +113,10 @@ export default new Router({
     {
       path: "/allowance",
       component: Allowance
+    },
+    {
+      path: "/report",
+      component: ReportAllowance
     }
   ],
 });

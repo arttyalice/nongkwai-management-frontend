@@ -9,6 +9,10 @@ export default {
         let res = await apiService.get(`/allowance/get/all?page=${page}&size=${size}&search=${search}`)
         return res.data
     },
+    async getAllPersonWithTypeAndAllowanceReport (from, to) {
+        let res = await apiService.get(`/allowance/get/report?from=${from}&to=${to}`)
+        return res.data
+    },
     async getAllPersonWithTypeAndAllowancebyID (alID) {
         let res = await apiService.get(`/allowance/get/one/${alID}`)
         return res.data
