@@ -51,7 +51,7 @@
         </el-table-column>
         <el-table-column
           prop="allowance_date"
-          label="ปีที่ได้รับเบี้ยยังชีพ"
+          label="วันที่ได้รับเบี้ยยังชีพ"
           width="150"
         >
           <template slot-scope="item">

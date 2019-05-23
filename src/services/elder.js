@@ -5,7 +5,7 @@ export default {
         let res = await apiService.get(`/elder/get/length`);
         return res.data;
     },
-    async getAllDisabled (page, size, search) {
+    async getAllElder (page, size, search) {
         let res = await apiService.get(`/elder/get/all?page=${page}&size=${size}&search=${search}`);
         return res.data;
     },
