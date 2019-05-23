@@ -2,18 +2,21 @@
   <div id="app">
     <span v-if="!isLoading">
       <span v-if="isLogin">
-        <AdminDrawer v-if="Number(user.position_id) === 4" :user="user" @logOutSuccess="checkIsUserLogin" >
+        <DirectorDrawer v-if="Number(user.position_id) === 1" :user="user" @logOutSuccess="checkIsUserLogin" >
           <router-view/>
-        </AdminDrawer>
+        </DirectorDrawer>
         <ManagerDrawer v-else-if="Number(user.position_id) === 2" :user="user" @logOutSuccess="checkIsUserLogin" >
           <router-view/>
         </ManagerDrawer>
-        <DirectorDrawer v-else-if="Number(user.position_id) === 1" :user="user" @logOutSuccess="checkIsUserLogin" >
-          <router-view/>
-        </DirectorDrawer>
-        <EmployeeDrawer v-else :user="user" @logOutSuccess="checkIsUserLogin" >
+        <EmployeeDrawer v-else-if="Number(user.position_id) === 3" :user="user" @logOutSuccess="checkIsUserLogin" >
           <router-view/>
         </EmployeeDrawer>
+        <AdminDrawer v-else-if="Number(user.position_id) === 4" :user="user" @logOutSuccess="checkIsUserLogin" >
+          <router-view/>
+        </AdminDrawer>
+        <div v-else>
+          ข้อมูลผู้ใช้ไม่ถูกต้อง
+        </div>
       </span>
       <LoginModal v-else @logInSuccess="checkIsUserLogin"/>
     </span>
@@ -65,6 +68,7 @@
         const userID = localStorage.getItem('admin_user_data');
         if (userID !== null) {
           this.user = await userService.getUserbyID(JSON.parse(userID));
+          console.log(this.user)
           this.isLogin = true;
         } else {
           this.isLogin = false;

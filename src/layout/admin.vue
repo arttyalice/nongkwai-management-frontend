@@ -45,6 +45,7 @@
 
 <script>
   export default {
+    props: ['user'],
     data() {
       const item = {
         date: '2016-05-02',
