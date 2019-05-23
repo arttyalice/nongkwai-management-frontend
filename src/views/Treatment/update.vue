@@ -176,7 +176,6 @@
 
             },
             submit () {
-                alert(this.treatment.isNewFile)
                 let req = new FormData()
                 req.append("user_id", localStorage.getItem('admin_user_data'))
                 req.append("treatment_detail", this.treatment.detail)
