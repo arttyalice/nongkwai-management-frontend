@@ -5,10 +5,10 @@
         <AdminDrawer v-if="Number(user.position_id) === 4" :user="user" @logOutSuccess="checkIsUserLogin" >
           <router-view/>
         </AdminDrawer>
-        <ManagerDrawer v-if="Number(user.position_id) === 2" :user="user" @logOutSuccess="checkIsUserLogin" >
+        <ManagerDrawer v-else-if="Number(user.position_id) === 2" :user="user" @logOutSuccess="checkIsUserLogin" >
           <router-view/>
         </ManagerDrawer>
-        <DirectorDrawer v-if="Number(user.position_id) === 1" :user="user" @logOutSuccess="checkIsUserLogin" >
+        <DirectorDrawer v-else-if="Number(user.position_id) === 1" :user="user" @logOutSuccess="checkIsUserLogin" >
           <router-view/>
         </DirectorDrawer>
         <EmployeeDrawer v-else :user="user" @logOutSuccess="checkIsUserLogin" >
