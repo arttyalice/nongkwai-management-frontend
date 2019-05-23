@@ -103,7 +103,7 @@
             };
         },
         async created() {
-            this.personList = await personService.getAllPerson(this.currentPage, 10, this.searchtext);
+            this.personList = await elderService.getAllElder(this.currentPage, 10, this.searchtext);
             this.dataLength = Number((await elderService.getLength())['length'])
         },
         methods: {

@@ -84,7 +84,7 @@
         </el-table-column>
         <el-table-column
           prop="allowance_date"
-          label="ปีที่ได้รับเบี้ยยังชีพ"
+          label="วันที่ได้รับเบี้ยยังชีพ"
         >
           <template slot-scope="item">
             {{ dateConvert(item.row.allowance_date) }}
