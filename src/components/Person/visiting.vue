@@ -8,11 +8,11 @@
                 <el-table-column
                     prop="visiting_date"
                     label="วันที่เยี่ยม"
-                    width="150">
+                    width="170">
                 </el-table-column>
                 <el-table-column
                     label="ผู้เยี่ยม"
-                    width="200"
+                    width="180"
                 >
                     <template slot-scope="item">
                         {{ `${item.row.staff_fname} ${item.row.staff_lname}` }}

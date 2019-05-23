@@ -21,12 +21,12 @@
                     :data="contacts"
                     style="width: 100%"
                 >
-                    <el-table-column
+                    <!-- <el-table-column
                         prop="contact_id"
                         label="รหัส"
                         width="60"
                     >
-                    </el-table-column>
+                    </el-table-column> -->
                     <el-table-column
                         prop="name"
                         label="ชื่อ-สกุล"

@@ -16,7 +16,7 @@
       
         <!-- Person info -->
         <el-row>
-            <h2>ข้อมูลส่วนตัว</h2>
+            <h2>ข้อมูลส่วนตัว</h2><br>
             <el-row>
                 <el-col  :xs="24" :sm="24" :md="12" :lg="8" :xl="8">
                     <b>ชื่อ-สกุล</b>: {{ `${person.person_titlename} ${person.person_firstname} ${person.person_lastname}` }}
@@ -31,7 +31,7 @@
                     <el-tag style="margin:0 3px;" type="warning" v-if="person.patient_id">เอดส์</el-tag>
                 </el-col>
             </el-row>
-        </el-row>
+        </el-row><br>
 
         <el-form ref="form" :model="visit" :rules="rules" label-width="" class="demo-form-inline">  
             <!-- Address -->

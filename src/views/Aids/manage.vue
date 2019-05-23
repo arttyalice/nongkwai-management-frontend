@@ -2,7 +2,7 @@
   <div class="about">
     <el-row>
       <el-col :span="12" class="align-l">
-        จัดการข้อมูลผู้ป่วยโรคเอดส์
+        <h3><b>จัดการข้อมูลผู้ป่วยโรคเอดส์</b></h3>
       </el-col>
     </el-row>
     <el-row class="search-bar-margin">
@@ -26,7 +26,7 @@
         </el-table-column>
         <el-table-column
           label="ชื่อ-นามสกุล"
-          width="180"
+          width="220"
         >
           <template slot-scope="item">
             {{ `${item.row.person_titlename} ${item.row.person_firstname} ${item.row.person_lastname}` }}
@@ -35,7 +35,7 @@
         <el-table-column
           prop="person_phone"
           label="เบอร์โทรศัพท์"
-          width="110"
+          width="150"
         >
         </el-table-column>
         <el-table-column
@@ -66,7 +66,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="ตัวเลือก"
+          label="แก้ไข"
           align="center"
           width="200"
         >
@@ -75,7 +75,7 @@
               <el-col :span="24">
                 <router-link :to="`/aid/update/${item.row.id_card}`">
                   <el-button type="success" plain icon="el-icon-edit">
-                    แก้ไข
+                    
                   </el-button>
                 </router-link>
               </el-col>

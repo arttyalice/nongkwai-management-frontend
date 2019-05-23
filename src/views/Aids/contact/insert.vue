@@ -16,8 +16,8 @@
         <el-form ref="form" :model="person" :rules="rules" label-width="120px" class="demo-form-inline">
             <!-- Person info -->
             <el-row>
-                <h2>ข้อมูลส่วนตัว</h2>
-            </el-row>
+                <h3>ข้อมูลส่วนตัว</h3>
+            </el-row><br>
             <el-row>
                 <el-col :span="8">
                     <el-form-item label="คำนำหน้า :" prop="titlename">
@@ -52,7 +52,7 @@
 
             <!-- Address -->
             <el-row>
-                <h2>ที่อยู่</h2>
+                <h3>ที่อยู่</h3><br>
             </el-row>
             <el-row>
                 <el-col :span="8">

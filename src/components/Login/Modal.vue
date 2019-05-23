@@ -7,6 +7,12 @@
             width="500px"
             center
         >
+        <el-row :gutter="20">
+            <el-col :span="8" :offset="8">
+                <img src="@/static/logo.png" alt="" width="100%">
+            </el-col>
+        </el-row>
+        <br>
         <span>
             <el-input placeholder="ชื่อผู้ใช้" v-model="userName" @keyup.enter.native="userLogin"></el-input>
             <el-input class="margin-t-md" type="password" placeholder="รหัสผ่าน" v-model="userPass" @keyup.enter.native="userLogin"></el-input>

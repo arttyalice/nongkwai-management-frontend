@@ -2,10 +2,12 @@
     <span>
         <el-dialog
             :visible="true"
-            title="ข้อมูลของผู้ป่วย"
             width="800px"
             :before-close="handleClose"
         >
+            <el-row class="align-c">
+                <h3>ข้อมูลของผู้ป่วยโรคเอดส์</h3>
+            </el-row><br>
             <span class="align-l">
                 <el-row>
                     <el-col :span="12">
@@ -30,8 +32,8 @@
                     </el-col>
                 </el-row>
 
-                <el-row class="align-c mg-t-md">
-                    <h2>ที่พักอาศัย</h2>
+                <el-row class="align-l mg-t-md">
+                    <h3>ที่พักอาศัย</h3>
                 </el-row>
                  <el-row>
                     <el-col :span="12">
@@ -66,8 +68,8 @@
                     </el-col>
                 </el-row>
 
-                <el-row class="align-c mg-t-md">
-                    <h2>รายละเอียดการป่วย</h2>
+                <el-row class="align-l mg-t-md">
+                    <h3>รายละเอียดการป่วย</h3>
                 </el-row>
                 <el-row>
                     <el-col :span="12">
@@ -83,8 +85,8 @@
                     </el-col>
                 </el-row>
 
-                <el-row class="align-c mg-t-md">
-                    <h2>รายได้ - รายจ่าย</h2>
+                <el-row class="align-l mg-t-md">
+                    <h3>รายได้ - รายจ่าย</h3>
                 </el-row>
                 <el-row>
                     <el-col :span="12">

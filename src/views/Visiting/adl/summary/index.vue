@@ -2,24 +2,24 @@
 <template>
     <span>
         <el-row>
-            <el-col class="align-l" :span="12">
-                <h2>ผลการประเมิน ADL</h2>
+            <el-col class="align-l" :span="14">
+                <h2>ผลการประเมิน Barthel Activity of Daily Living Scale (ADL)</h2>
             </el-col>
-            <el-col class="align-r" :span="12">
+            <el-col class="align-r" :span="10">
                 <router-link to="/visiting">
                     <el-button plain>
                         กลับหน้าหลัก
                     </el-button>
                 </router-link>
             </el-col>
-        </el-row>
+        </el-row><br>
 
         <el-row>
             <el-col><h2>{{ ` ผลการประเมิน ADL ของ ${summary.title} ${summary.fname} ${summary.lname}` }}</h2></el-col>
         </el-row>
         <el-row style="font-size: 24px;">
-            <el-col>{{ `ผลการประเมินของวันที่ ${thaidatetime(summary.created_date)} ได้ทั้งหมด` }} <b>{{summary.score}}</b> {{ `คะแนน` }}</el-col>
-        </el-row>
+            <el-col>{{ `วันที่ ${thaidatetime(summary.created_date)} ได้ทั้งหมด` }} <b>{{summary.score}}</b> {{ `คะแนน` }}</el-col>
+        </el-row><br>
         <el-row>
             <el-col><h3>{{ `ถูกจัดอยู่ในกลุ่ม` }}</h3></el-col>
         </el-row>

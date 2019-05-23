@@ -2,7 +2,7 @@
     <span>
         <el-row>
             <el-col class="align-l" :span="12">
-                <h2>เพิ่มข้อมูลการรักษา</h2>
+                <h2>แก้ไขข้อมูลการรักษา</h2>
             </el-col>
             <el-col class="align-r" :span="12">
                 <router-link to="/treatment">

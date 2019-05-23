@@ -1,8 +1,8 @@
 <template>
   <div class="about">
     <el-row>
-      <el-col :span="12" class="align-l">
-        เยี่ยมบ้านและ ประเมิณ ADL
+      <el-col :span="14" class="align-l">
+        <h3><b>การเยี่ยมบ้านและประเมิณ Barthel Activity of Daily Living Scale (ADL)</b></h3>
       </el-col>
     </el-row>
     <el-row class="search-bar-margin">
@@ -21,12 +21,12 @@
         <el-table-column
           prop="id_card"
           label="เลขบัตรประชาชน"
-          width="200"
+          width="130"
         >
         </el-table-column>
         <el-table-column
           label="ชื่อ-นามสกุล"
-          width="200"
+          width="230"
         >
           <template slot-scope="item">
             {{ `${item.row.person_titlename} ${item.row.person_firstname} ${item.row.person_lastname}` }}
@@ -40,7 +40,7 @@
         </el-table-column>
         <el-table-column
           label="ประเภท"
-          width="200"
+          width="210"
         >
           <template slot-scope="item">
             <el-tag style="margin:0 3px;" type="warning" v-if="item.row.disability_id">พิการ</el-tag>
@@ -49,20 +49,20 @@
           </template>
         </el-table-column>
         <el-table-column
-            label="ข้อมูล"
+            label="เส้นทาง / ประวัติการเยี่ยม"
             align="center"
-            min-width="320"
+            min-width="180"
         >
             <template slot-scope="item">
                 <el-row>
                     <el-col :span="12">
                         <el-button @click="popToGmap(item.row.person_lat, item.row.person_lng)" type="primary" plain icon="el-icon-location-outline">
-                          เส้นทาง
+                          
                         </el-button>
                     </el-col>
                     <el-col :span="12">
                       <el-button @click="visit_history_modal(item.row.id_card)" type="success" plain icon="el-icon-document">
-                        ประวัติการเยี่ยม
+                        
                       </el-button>
                     </el-col>
                 </el-row>
@@ -74,7 +74,7 @@
         <el-table-column
           label="ตัวเลือก"
           align="center"
-          width="150"
+          width="140"
         >
           <template slot-scope="item">
             <el-row>

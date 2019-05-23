@@ -2,7 +2,7 @@
   <div class="about">
     <el-row>
       <el-col :span="12" class="align-l">
-        จัดการข้อมูลประชากร
+        <h3><b>จัดการข้อมูลประชากร</b></h3>
       </el-col>
       <el-col :span="12" class="align-r">
           <router-link to="/person/insert">
@@ -33,7 +33,7 @@
         </el-table-column>
         <el-table-column
           label="ชื่อ-นามสกุล"
-          width="180"
+          width="200"
         >
           <template slot-scope="item">
             {{ `${item.row.person_titlename} ${item.row.person_firstname} ${item.row.person_lastname}` }}
@@ -76,22 +76,22 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="ตัวเลือก"
+          label="แก้ไข / ลบ"
           align="center"
-          width="300"
+          width="170"
         >
           <template slot-scope="item">
             <el-row>
               <el-col :span="12">
                 <router-link :to="`/person/update/${item.row.id_card}`">
                   <el-button type="success" plain icon="el-icon-edit">
-                    แก้ไข
+                    
                   </el-button>
                 </router-link>
               </el-col>
               <el-col :span="12">
                 <el-button @click="removePerson(item.row)" type="danger" plain icon="el-icon-delete">
-                  ลบ
+                  
                 </el-button>
               </el-col>
             </el-row>
@@ -141,6 +141,9 @@
             this.dataLength = Number((await personService.getLength())['length'])
         },
         methods: {
+            numberIDcard(idcard) {
+                  return idcard = idcard.replace( /(\d{1})(\d{4})(\d{5})(\d{1})(\d{2})/, '$1' + '-' + '$2' + '-' + '$3' + '-' + '$4' + '-' + '$5')
+            },
             onPageChange(page) {
                 this.currentPage = page - 1;
                 this.fetchChange();

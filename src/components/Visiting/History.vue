@@ -2,7 +2,7 @@
     <el-dialog
         title="ประวัติการเยี่ยมบ้าน"
         :visible.sync="centerDialogVisible"
-        width="800px"
+        width="1000px"
         center
     >
         <span>
@@ -13,11 +13,11 @@
                 <el-table-column
                     prop="visiting_date"
                     label="วันที่เยี่ยม"
-                    width="150">
+                    width="160">
                 </el-table-column>
                 <el-table-column
                     label="ผู้เยี่ยม"
-                    width="200"
+                    width="160"
                 >
                     <template slot-scope="item">
                         {{ `${item.row.staff_fname} ${item.row.staff_lname}` }}
@@ -27,7 +27,7 @@
                     prop="adl_summary"
                     label="ผลรวมคะแนน ADL"
                     align="center"
-                    width="180">
+                    width="140">
                 </el-table-column>
                 <el-table-column
                     label="ผลรวมคะแนน ADL"
@@ -50,7 +50,9 @@
                 </el-table-column>
                 <el-table-column
                     prop="visiting_detail"
-                    label="รายละเอียด">
+                    label="รายละเอียด"
+                    width="310"
+                    >
                 </el-table-column>
             </el-table>
         </span>

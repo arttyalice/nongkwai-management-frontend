@@ -2,7 +2,7 @@
   <div class="about">
     <el-row>
       <el-col :span="12" class="align-l">
-        จัดการข้อมูลผู้พิการ
+        <h3><b>จัดการข้อมูลผู้พิการ</b></h3>
       </el-col>
     </el-row>
     <el-row class="search-bar-margin">
@@ -38,16 +38,16 @@
           width="110"
         >
         </el-table-column>
-        <el-table-column
+        <!-- <el-table-column
           prop="disability_info"
           label="ข้อมูลของผู้พิการ"
           width="200"
         >
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column
           prop="disability_type"
           label="มีความพิการทาง"
-          width="200"
+          width="280"
         >
         </el-table-column>
         <el-table-column
@@ -58,7 +58,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="ตัวเลือก"
+          label="แก้ไข"
           align="center"
           width="250"
         >
@@ -67,7 +67,7 @@
               <el-col :span="24">
                 <router-link :to="`/disabled/update/${item.row.id_card}`">
                   <el-button type="success" plain icon="el-icon-edit">
-                    แก้ไข
+                    
                   </el-button>
                 </router-link>
               </el-col>

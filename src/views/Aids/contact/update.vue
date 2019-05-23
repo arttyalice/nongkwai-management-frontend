@@ -3,7 +3,7 @@
     <span>
         <el-row>
             <el-col class="align-l" :span="12">
-                <h2>เพิ่มข้อมูลผู้ติดต่อ</h2>
+                <h2>แก้ไชข้อมูลผู้ติดต่อ</h2>
             </el-col>
             <el-col class="align-r" :span="12">
                 <router-link to="/aid">
@@ -16,8 +16,8 @@
         <el-form ref="form" :model="person" :rules="rules" label-width="120px" class="demo-form-inline">
             <!-- Person info -->
             <el-row>
-                <h2>ข้อมูลส่วนตัว</h2>
-            </el-row>
+                <h3>ข้อมูลส่วนตัว</h3>
+            </el-row><br>
             <el-row>
                 <el-col :span="8">
                     <el-form-item label="คำนำหน้า :" prop="titlename">
@@ -52,8 +52,8 @@
 
             <!-- Address -->
             <el-row>
-                <h2>ที่อยู่</h2>
-            </el-row>
+                <h3>ที่อยู่</h3>
+            </el-row><br>
             <el-row>
                 <el-col :span="8">
                     <el-form-item label="บ้านเลขที่ :" prop="address.num">

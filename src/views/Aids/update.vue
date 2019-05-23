@@ -21,11 +21,11 @@
                 <el-col :span="12">
                     <b>ชื่อ</b>: {{ `${person.person_titlename} ${person.person_firstname}\t${person.person_lastname}` }}
                 </el-col>
-            </el-row>
+            </el-row><br>
             <!-- Habitant info -->
             <el-row>
-                <h2>ที่พักอาศัย</h2>
-            </el-row>
+                <h3>ที่พักอาศัย</h3>
+            </el-row><br>
             <el-row>
                 <el-col :span="24">
                     <el-form-item label="ผู้ครอบครอง: " prop="text" style="align: left;">
@@ -55,7 +55,7 @@
                 </el-col>
             </el-row>
             <el-row>
-                <el-col :span="12">
+                <el-col :span="24">
                     <el-form-item label="การพักอาศัย: " prop="text" style="align: left;">
                         <el-radio-group v-model="aid.living">
                             <el-radio border label="ลำพัง" />
@@ -71,10 +71,10 @@
             </el-row>
             <!-- Transport info -->
             <el-row>
-                <h2>ความสะดวกในการเดินทาง</h2>
-            </el-row>
+                <h3>ความสะดวกในการเดินทาง</h3>
+            </el-row><br>
             <el-row>
-                <el-col :span="12">
+                <el-col :span="24">
                     <el-form-item label="สถานที่ใกล้ที่สุด: " prop="text" style="align: left;">
                         <el-radio-group v-model="aid.nearby">
                             <el-radio border label="เพื่อนบ้าน" />
@@ -90,7 +90,7 @@
                 </el-col>
             </el-row>
             <el-row>
-                <el-col :span="12">
+                <el-col :span="24">
                     <el-form-item label="สะดวกหรือไม่: " prop="text" style="align: left;">
                         <el-radio-group v-model="aid.nearbyCheck">
                             <el-radio border label="สะดวก" />
@@ -106,8 +106,8 @@
             </el-row>
             <!-- Symtom info -->
             <el-row>
-                <h2>ข้อมูลการติดเชื้อ</h2>
-            </el-row>
+                <h3>ข้อมูลการติดเชื้อ</h3>
+            </el-row><br>
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="ระยะเวลาป่วย(ปี): " prop="text" style="align: left;">

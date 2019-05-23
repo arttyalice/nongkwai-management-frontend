@@ -9,13 +9,13 @@
                     <el-table-column
                         prop="disease"
                         label="อาการป่วย"
-                        width="130"
+                        width="180"
                     >
                     </el-table-column>
                     <el-table-column
                         prop="hospital"
                         label="สถานที่เข้ารับการรักษา"
-                        width="130"
+                        width="200"
                     >
                     </el-table-column>
                     <el-table-column
@@ -27,7 +27,7 @@
                     <el-table-column
                         prop="DBP"
                         label="ความดันเลือดที่ต่ำสุด(DBP)"
-                        width="130"
+                        width="110"
                     >
                     </el-table-column>
                     <el-table-column

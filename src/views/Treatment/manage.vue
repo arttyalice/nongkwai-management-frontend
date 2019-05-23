@@ -2,7 +2,7 @@
   <div class="about">
     <el-row>
       <el-col :span="12" class="align-l">
-        ประวัติการรักษา
+        <h3><b>ประวัติการรักษาพยาบาล</b></h3>
       </el-col>
       <el-col :span="12" class="align-r">
           <router-link to="/treatment/insert">
@@ -33,7 +33,7 @@
         </el-table-column>
         <el-table-column
           label="ชื่อ-นามสกุล"
-          width="180"
+          width="190"
         >
           <template slot-scope="item">
             {{ `${item.row.person_titlename} ${item.row.person_firstname} ${item.row.person_lastname}` }}
@@ -41,7 +41,6 @@
         </el-table-column>
         <el-table-column
           label="ประเภท"
-          width="200"
         >
           <template slot-scope="item">
             <el-tag style="margin:0 3px;" type="info" v-if="item.row.disability_id">พิการ</el-tag>
@@ -49,12 +48,12 @@
             <el-tag style="margin:0 3px;" type="warning" v-if="item.row.patient_id">เอดส์</el-tag>
           </template>
         </el-table-column>
-        <el-table-column
+        <!-- <el-table-column
           prop="person_phone"
           label="เบอร์โทรศัพท์"
           width="130"
         >
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column
           prop="SBP"
           label="ความดันของเลือดสูงสุด(SBP)"
@@ -64,19 +63,19 @@
         <el-table-column
           prop="DBP"
           label="ความดันเลือดที่ต่ำสุด(DBP)"
-          width="130"
+          width="110"
         >
         </el-table-column>
         <el-table-column
           prop="height"
           label="ส่วนสูง"
-          width="100"
+          width="70"
         >
         </el-table-column>
         <el-table-column
           prop="weigth"
           label="น้ำหนัก"
-          width="100"
+          width="70"
         >
         </el-table-column>
         <el-table-column
@@ -98,22 +97,22 @@
         <!-- <el-table-column>
         </el-table-column> -->
         <el-table-column
-          label="ตัวเลือก"
+          label="แก้ไข  /  ลบ"
           align="center"
-          width="250"
+          width="160"
         >
           <template slot-scope="item">
             <el-row>
               <el-col :span="12">
                 <router-link :to="`/treatment/update/${item.row.treatment_id}`">
                   <el-button type="success" plain icon="el-icon-edit">
-                    แก้ไข
+                    
                   </el-button>
                 </router-link>
               </el-col>
               <el-col :span="12">
-                <el-button @click="deleteTreatment(item.row.treatment_id)" type="danger" plain icon="el-icon-edit">
-                  ลบ
+                <el-button @click="deleteTreatment(item.row.treatment_id)" type="danger" plain icon="el-icon-delete">
+                  
                 </el-button>
               </el-col>
             </el-row>

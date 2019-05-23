@@ -2,7 +2,7 @@
   <div class="about">
     <el-row>
       <el-col :span="12" class="align-l">
-        จัดการข้อมูลเบี้ยยังชีพ
+        <h3><b>จัดการข้อมูลเบี้ยยังชีพ</b></h3>
       </el-col>
       <el-col :span="12" class="align-r">
         <el-button type="primary" plain @click="insertModalVisible = true">

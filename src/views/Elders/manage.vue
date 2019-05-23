@@ -2,7 +2,7 @@
   <div class="about">
     <el-row>
       <el-col :span="12" class="align-l">
-        จัดการข้อมูลผู้สูงอายุ
+        <h3><b>จัดการข้อมูลผู้สูงอายุ</b></h3>
       </el-col>
     </el-row>
     <el-row class="search-bar-margin">
@@ -26,7 +26,7 @@
         </el-table-column>
         <el-table-column
           label="ชื่อ-นามสกุล"
-          width="200"
+          width="230"
         >
           <template slot-scope="item">
             {{ `${item.row.person_titlename} ${item.row.person_firstname} ${item.row.person_lastname}` }}
@@ -46,7 +46,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="ตัวเลือก"
+          label="แก้ไข"
           align="center"
           width="300"
         >
@@ -55,7 +55,7 @@
               <el-col :span="24">
                 <router-link :to="`/elder/update/${item.row.id_card}`">
                   <el-button type="success" plain icon="el-icon-edit">
-                    แก้ไข
+                    
                   </el-button>
                 </router-link>
               </el-col>

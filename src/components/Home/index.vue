@@ -1,10 +1,10 @@
 <template>
   <span>
     <div class="hello">
-      <b>ยินดีต้อนรับเข้าสู่ระบบจัดการประชากร</b>
+      <b>ยินดีต้อนรับเข้าสู่<br>ระบบสารสนเทศเพื่อการบริหารจัดการข้อมูลผู้สูงอายุ ผู้พิการ และผู้ป่วยโรคเอดส์</b>
     </div>
     <div class="hello">
-      เทศบาลตำบล หนองควาย
+      <p>เทศบาลตำบลหนองควาย จังหวัดเชียงใหม่</p>
     </div>
     <div>
       <img src="@/static/logo.png" alt="" srcset="" width="30%"> 
@@ -24,6 +24,6 @@ export default class HelloWorld extends Vue {
 
 <style scoped lang="scss">
   .hello {
-    font-size: 36px;
+    font-size: 26px;
   }
 </style>
