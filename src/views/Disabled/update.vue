@@ -18,29 +18,15 @@
                 <el-col :span="24">
                     <el-form-item label="ประเภทความพิการ: " prop="titlename">
                         <el-row>
-                            <el-radio-group v-model="disability.type">
-                                <el-col :span="24">
-                                    <el-radio label="ความพิการทางการเห็น" />
-                                </el-col>
-                                <el-col :span="24">
-                                    <el-radio label="ความพิการทางสติปัญญา" />
-                                </el-col>
-                                <el-col :span="24">
-                                    <el-radio label="ความพิการทางการได้ยินหรือสื่อความหมาย" />
-                                </el-col>
-                                <el-col :span="24">
-                                    <el-radio label="ความพิการทางการเรียนรู้" />
-                                </el-col>
-                                <el-col :span="24">
-                                    <el-radio label="ความพิการทางการเคลื่นไหวหรือร่างกาย" />
-                                </el-col>
-                                <el-col :span="24">
-                                    <el-radio label="ความพิการทางออทิสติก" />
-                                </el-col>
-                                <el-col :span="24">
-                                    <el-radio label="ความพิการทางจิตใจหรือพฤติกรรม" />
-                                </el-col>
-                            </el-radio-group>
+                            <el-select style="width: 400px;" v-model="disability.type" multiple placeholder="เลือกประเภทความพิการ"> 
+                                <el-option value="ความพิการทางการเห็น" label="ความพิการทางการเห็น"></el-option>
+                                <el-option value="ความพิการทางสติปัญญา" label="ความพิการทางสติปัญญา"></el-option>
+                                <el-option value="ความพิการทางการได้ยินหรือสื่อความหมาย" label="ความพิการทางการได้ยินหรือสื่อความหมาย"></el-option>
+                                <el-option value="ความพิการทางการเรียนรู้" label="ความพิการทางการเรียนรู้"></el-option>
+                                <el-option value="ความพิการทางการเคลื่นไหวหรือร่างกาย" label="ความพิการทางการเคลื่นไหวหรือร่างกาย"></el-option>
+                                <el-option value="ความพิการทางออทิสติก" label="ความพิการทางออทิสติก"></el-option>
+                                <el-option value="ความพิการทางจิตใจหรือพฤติกรรม" label="ความพิการทางจิตใจหรือพฤติกรรม"></el-option>
+                            </el-select>
                         </el-row>
                     </el-form-item>
                 </el-col>
@@ -108,7 +94,7 @@
                 },
                 disability: {
                     id: null,
-                    type: '',
+                    type: [],
                     info: '',
                     detail: '',
                     getmoney_method: null
@@ -119,11 +105,11 @@
         async created() {
             try {
                 const res = await disableService.getPersonbyID(this.$router.currentRoute.params.pID);
-                console.log(res)
                 this.person = res
+                console.log(res)
                 this.disability = {
                     id: res.disability_id,
-                    type: res.disability_type,
+                    type: res.disability_type ? JSON.parse(res.disability_type) : [],
                     info: res.disability_info,
                     detail: res.disability_detail,
                     getmoney_method: parseInt(res.getmoney_id)
@@ -140,7 +126,7 @@
             reset() {
                 this.disability = {
                     id: null,
-                    type: '',
+                    type: [],
                     info: '',
                     detail: '',
                     getmoney_method: null
@@ -163,7 +149,7 @@
                 FormPerson.append('id_card', this.$router.currentRoute.params.pID);
                 FormPerson.append('disability_info', this.disability.info);
                 FormPerson.append('disability_detail', this.disability.detail);
-                FormPerson.append('disability_type', this.disability.type);
+                FormPerson.append('disability_type', JSON.stringify(this.disability.type));
                 FormPerson.append('getmoney_id', this.disability.getmoney_method);
                 FormPerson.append('user_id', localStorage.getItem('admin_user_data'));
                 try {
