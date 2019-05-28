@@ -29,8 +29,10 @@
             <h2>ข้อมูลผู้พิการ</h2>
         </el-row>
         <el-row>
-            <el-col :span="24">
-                <b>ประเภทความพิการ:</b> {{ `${disableInfo.disability_type}` }}
+                <b>ประเภทความพิการ:</b>
+                <span v-for="(row, index) in disableInfo.disability_type" :key="index">
+                    {{ row }}<span v-if="index !== disableInfo.disability_type.length - 1">, </span>
+                </span>
             </el-col>
         </el-row>
         <el-row>
@@ -67,6 +69,7 @@
         },
         async created () {
             this.disableInfo = await disabilityService.getPersonbyID(this.id_card)
+            this.disableInfo.disability_type = JSON.parse(this.disableInfo.disability_type)
             this.isLoading = false
         },
         methods: {

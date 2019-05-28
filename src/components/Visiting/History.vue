@@ -34,13 +34,13 @@
                     width="180"
                 >
                     <template slot-scope="item">
-                        <el-tag v-if="item.row.adl_summary <= 2" type="info">
+                        <el-tag v-if="item.row.adl_summary <= 4" type="info">
                             ภาวะพึ่งพาโดยสมบูรณ์
                         </el-tag>
-                        <el-tag v-else-if="item.row.adl_summary <= 5" type="danger">
+                        <el-tag v-else-if="item.row.adl_summary <= 8" type="danger">
                             ภาวะพึ่งพารุนแรง
                         </el-tag>
-                        <el-tag v-else-if="item.row.adl_summary <= 8" type="warning">
+                        <el-tag v-else-if="item.row.adl_summary <= 11" type="warning">
                             ภาวะพึ่งพาปานกลาง
                         </el-tag>
                         <el-tag v-else type="success">

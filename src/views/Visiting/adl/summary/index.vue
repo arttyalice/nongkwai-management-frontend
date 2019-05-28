@@ -25,17 +25,17 @@
         </el-row>
         <el-row>
             <el-col>
-                <el-tag v-if="summary.score <= 2" class="tag-adl-summary" type="info">
-                    ภาวะพึ่งพาโดยสมบูรณ์ (0 - 2 คะแนน)
+                <el-tag v-if="summary.score <= 4" class="tag-adl-summary" type="info">
+                    ภาวะพึ่งพาโดยสมบูรณ์ (0 - 4 คะแนน)
                 </el-tag>
-                <el-tag v-else-if="summary.score <= 5" class="tag-adl-summary" type="danger">
-                    ภาวะพึ่งพารุนแรง (3 - 5 คะแนน)
+                <el-tag v-else-if="summary.score <= 8" class="tag-adl-summary" type="danger">
+                    ภาวะพึ่งพารุนแรง (5 - 8 คะแนน)
                 </el-tag>
-                <el-tag v-else-if="summary.score <= 8" class="tag-adl-summary" type="warning">
-                    ภาวะพึ่งพาปานกลาง (6 - 8 คะแนน)
+                <el-tag v-else-if="summary.score <= 11" class="tag-adl-summary" type="warning">
+                    ภาวะพึ่งพาปานกลาง (9 - 11 คะแนน)
                 </el-tag>
                 <el-tag v-else class="tag-adl-summary" type="success">
-                    ไม่เป็นภาระพึ่งพา (9+ คะแนน)
+                    ไม่เป็นภาระพึ่งพา (12+ คะแนน)
                 </el-tag>
             </el-col>
         </el-row>

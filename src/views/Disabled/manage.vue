@@ -49,6 +49,11 @@
           label="มีความพิการทาง"
           width="280"
         >
+          <template slot-scope="item">
+            <span v-for="(row, index) in item.row.disability_type" :key="index">
+              {{ row }}<span v-if="index !== item.row.disability_type.length - 1">, </span>
+            </span>
+          </template>
         </el-table-column>
         <el-table-column
           label="วัน/เดือน/ปี เกิด"
@@ -121,6 +126,9 @@
         async created() {
             this.disabledList = await disabledService.getAllDisabled(this.currentPage, 10, this.searchtext);
             this.dataLength = Number((await disabledService.getLength())['length'])
+            this.disabledList.forEach(e => {
+              e.disability_type = JSON.parse(e.disability_type)
+            })
         },
         methods: {
             onPageChange(page) {
