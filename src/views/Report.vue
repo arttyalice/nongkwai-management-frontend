@@ -11,7 +11,7 @@
       </el-col>
     </el-row>
     <el-row style="margin-bottom:10px;">
-        <el-col :span="2" style="line-height: 38px;">
+        <el-col :span="3" style="line-height: 38px;">
             {{ 'ประเภทประชากร: ' }}
         </el-col>
         <el-col :span="5">
@@ -23,7 +23,7 @@
         </el-col>
     </el-row>
     <el-row>
-        <el-col :span="2" style="line-height: 38px;">
+        <el-col :span="3" style="line-height: 38px;">
             {{ 'รับเมื่อ' }}
         </el-col>
         <el-col :span="5">
@@ -36,7 +36,7 @@
                     return new Date(`${year}-01-01`)
                 })()"
                 type="date"
-                placeholder="เลือกวันเกิด">
+                placeholder="เลือกวันรับเบี้ยยังชีพ">
             </el-date-picker>
         </el-col>
         <el-col :span="1" style="line-height: 38px;">
@@ -52,7 +52,7 @@
                     return new Date(`${year}-01-01`)
                 })()"
                 type="date"
-                placeholder="เลือกวันเกิด">
+                placeholder="เลือกวันรับเบี้ยยังชีพ">
             </el-date-picker>
         </el-col>
         <el-col :span="2">
