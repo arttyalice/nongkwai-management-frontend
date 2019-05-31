@@ -20,8 +20,18 @@
             </el-row><br>
             <el-row>
                 <el-col :span="8">
-                    <el-form-item label="คำนำหน้า :" prop="titlename">
+                    <!-- <el-form-item label="คำนำหน้า :" prop="titlename">
                         <el-input placeholder="นาย, นาง, นางสาว" v-model="person.titlename"></el-input>
+                    </el-form-item> -->
+                    <el-form-item label="คำนำหน้า :" prop="titlename">
+                        <el-select v-model="person.titlename" placeholder="คำนำหน้า" label="คำนำหน้า" style="width: 100%">
+                            <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                            </el-option>
+                        </el-select>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -126,6 +136,28 @@
                 districtList: [],
                 subDistrictList: [],
                 center: { lat:18.796143, lng:98.979263 },
+                options: [
+                    {
+                        value: 'นาย',
+                        label: 'นาย'
+                    },
+                    {
+                        value: 'นาง',
+                        label: 'นาง'
+                    },
+                    {
+                        value: 'นางสาว',
+                        label: 'นางสาว'
+                    },
+                    {
+                        value: 'เด็กชาย',
+                        label: 'เด็กชาย'
+                    },
+                    {
+                        value: 'เด็กหญิง',
+                        label: 'เด็กหญิง'
+                    }
+                ],
                 rules: {
                     titlename: [
                         { required: true, message: 'กรุณากรอกคำนำหน้าชื่อ', trigger: 'blur', },

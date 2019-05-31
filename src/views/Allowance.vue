@@ -61,21 +61,21 @@
         <el-table-column
           prop="allowance_money"
           label="จำนวนเงิน"
-          width="130"
+          width="90"
         >
         </el-table-column>
         <el-table-column>
         </el-table-column>
         <el-table-column
-          label="ตัวเลือก"
+          label="แก้ไข"
           align="center"
-          width="150"
+          width="100"
         >
           <template slot-scope="item">
             <el-row>
               <el-col :span="24">
                 <el-button @click="openUpdateModal(item.row.allowance_id)" type="success" plain icon="el-icon-edit">
-                    แก้ไข
+                    
                 </el-button>
               </el-col>
             </el-row>

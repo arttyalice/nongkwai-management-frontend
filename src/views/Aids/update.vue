@@ -84,7 +84,7 @@
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="ระยะทาง: " prop="text" style="align: left;">
+                    <el-form-item label="ระยะทาง (กิโลเมตร): " prop="text" style="align: left;">
                         <el-input-number style="width: 100%;" class="left-number" :controls="false" v-model="aid.nearbyDistant" placeholder="ระยะทาง"></el-input-number>
                     </el-form-item>
                 </el-col>
@@ -110,7 +110,7 @@
             </el-row><br>
             <el-row>
                 <el-col :span="12">
-                    <el-form-item label="ระยะเวลาป่วย(ปี): " prop="text" style="align: left;">
+                    <el-form-item label="ระยะเวลาป่วย (ปี): " prop="text" style="align: left;">
                         <el-input-number v-mask="'####'" style="width: 100%;" class="left-number" :controls="false" v-model="aid.sick" placeholder="ระยะเวลาป่วย"></el-input-number>
                     </el-form-item>
                 </el-col>

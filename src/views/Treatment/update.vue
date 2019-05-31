@@ -37,12 +37,12 @@
             </el-row>
             <el-row>
                 <el-col :span="12">
-                    <el-form-item label="น้ำหนัก :" prop="height">
+                    <el-form-item label="น้ำหนัก (กิโลกรัม) :" prop="height">
                         <el-input v-mask="'####'" v-model="treatment.height" placeholder="น้ำหนัก(กิโลกรัม)"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="ส่วนสูง :" prop="weigth">
+                    <el-form-item label="ส่วนสูง (เซนติเมตร) :" prop="weigth">
                         <el-input v-mask="'####'" v-model="treatment.weigth" placeholder="ส่วนสูง(เซนติเมตร)"></el-input>                        
                     </el-form-item>
                 </el-col>

@@ -2,7 +2,7 @@
   <div class="about">
     <el-row>
       <el-col :span="14" class="align-l">
-        <h3><b>การเยี่ยมบ้านและประเมิณ Barthel Activity of Daily Living Scale (ADL)</b></h3>
+        <h3><b>การเยี่ยมบ้านและประเมิน Barthel Activity of Daily Living Scale (ADL)</b></h3>
       </el-col>
     </el-row>
     <el-row class="search-bar-margin">

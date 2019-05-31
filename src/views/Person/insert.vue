@@ -20,8 +20,18 @@
             </el-row><br>
             <el-row>
                 <el-col :span="8">
-                    <el-form-item label="คำนำหน้า :" prop="titlename">
+                    <!-- <el-form-item label="คำนำหน้า :" prop="titlename">
                         <el-input placeholder="นาย, นาง, นางสาว" v-model="person.titlename"></el-input>
+                    </el-form-item> -->
+                    <el-form-item label="คำนำหน้า :" prop="titlename">
+                        <el-select v-model="person.titlename" placeholder="คำนำหน้า" label="คำนำหน้า" style="width: 100%">
+                            <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                            </el-option>
+                        </el-select>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -55,7 +65,7 @@
             </el-row>
             <el-row>
                 <el-col :span="12">
-                    <el-form-item label="วันเกิด :" prop="birthDate">
+                    <el-form-item label="วัน/เดือน/ปี เกิด :" prop="birthDate">
                         <el-date-picker
                             style="width: 100%;"
                             v-model="person.birthDate"
@@ -65,7 +75,7 @@
                                 return new Date(`${year}-01-01`)
                             })()"
                             type="date"
-                            placeholder="เลือกวันเกิด">
+                            placeholder="เลือกวัน/เดือน/ปี เกิด">
                         </el-date-picker>
                     </el-form-item>
                 </el-col>
@@ -207,6 +217,28 @@
                 districtList: [],
                 subDistrictList: [],
                 center: { lat:18.796143, lng:98.979263 },
+                options: [
+                    {
+                        value: 'นาย',
+                        label: 'นาย'
+                    },
+                    {
+                        value: 'นาง',
+                        label: 'นาง'
+                    },
+                    {
+                        value: 'นางสาว',
+                        label: 'นางสาว'
+                    },
+                    {
+                        value: 'เด็กชาย',
+                        label: 'เด็กชาย'
+                    },
+                    {
+                        value: 'เด็กหญิง',
+                        label: 'เด็กหญิง'
+                    }
+                ],
                 rules: {
                     fname: [
                         { required: true, message: 'กรุณากรอกชื่อจริง', trigger: 'blur', },
