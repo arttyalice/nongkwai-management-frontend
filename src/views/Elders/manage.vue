@@ -4,6 +4,16 @@
       <el-col :span="12" class="align-l">
         <h3><b>จัดการข้อมูลผู้สูงอายุ</b></h3>
       </el-col>
+      <el-col :span="12" class="align-r">
+        <h3>จำนวนผู้สูงอายุ <b>{{ dataLength }}</b> คน</h3>
+      </el-col>
+    </el-row>
+    <el-row style="margin: 10px;">
+      <el-col :span="24" class="align-r">
+        <el-button type="primary" plain @click="disabledReport">
+            ออกรายงาน
+        </el-button>
+      </el-col>
     </el-row>
     <el-row class="search-bar-margin">
       <el-col :span="12">
@@ -13,7 +23,7 @@
         <el-button @click="serachingData" style="margin-left: 5px;" type="primary" icon="el-icon-search">ค้นหา</el-button>
       </el-col>
     </el-row>
-    <el-row>
+    <el-row id="PrintTable">
       <el-table
         :data="personList"
         style="width: 100%"
@@ -107,6 +117,19 @@
             this.dataLength = Number((await elderService.getLength())['length'])
         },
         methods: {
+			async disabledReport () {
+                const tmp = this.personList
+				this.personList = await elderService.getAllElder(0, 'all', '');
+				setTimeout(() => {
+					const printcontent = document.getElementById('PrintTable')
+					const new_window = window.open()
+					new_window.document.write(printcontent.outerHTML)
+					new_window.print()
+					new_window.close()
+	
+					this.personList = tmp
+				}, 300)
+            },
             onPageChange(page) {
                 this.currentPage = page - 1;
                 this.fetchChange();
@@ -116,7 +139,7 @@
               this.fetchChange();
             },
             async fetchChange() {
-                this.personList = await personService.getAllPerson(this.currentPage, 10, this.searchtext);
+                this.personList = await elderService.getAllElder(this.currentPage, 10, this.searchtext);
             },
             async removePerson(row) {
                 this.$confirm(`โปรดตรวจสอบให้แน่ใจอีกครั้งข้อมูลของ ${row.person_firstname} ${row.person_lastname} จะไม่สามารถกูคืนได้`,
@@ -125,7 +148,7 @@
                   confirmButtonText: 'ตกลง',
                 }).then(async () => {
                   try {
-                    const res = await personService.removePerson(row.id_card);
+                    const res = await elderService.removePerson(row.id_card);
                     this.$alert(`ลบข้อมูลของ ${row.person_firstname} ${row.person_lastname} เรียบร้อยแล้ว`, 'ลบข้อมูลสำเร็จแล้ว', {
                       type: 'success',
                     });

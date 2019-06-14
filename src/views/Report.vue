@@ -21,6 +21,17 @@
             <el-option label="ผู้สูงอายุ" :value="3"></el-option>
           </el-select>
         </el-col>
+
+        <el-col :span="3" style="line-height: 38px;">
+            {{ 'ประเภทเบี้ยยังชีพ: ' }}
+        </el-col>
+        <el-col :span="5">
+          <el-select style="width: 100%;" v-model="person.allowanceType" multiple placeholder="เลือกประเภท">
+            <el-option label="ผู้ป่วยโรคเอดส์" :value="1"></el-option>
+            <el-option label="ผู้พิการ" :value="2"></el-option>
+            <el-option label="ผู้สูงอายุ" :value="3"></el-option>
+          </el-select>
+        </el-col>
     </el-row>
     <el-row>
         <el-col :span="3" style="line-height: 38px;">
@@ -138,13 +149,14 @@
                     { id: 1, name: 'ผู้ใช้งานระบบ' },
                 ],
                 person: {
-                  type: []
+                  type: [],
+                  allowanceType: []
                 }
             };
         },
         async created() {
             try {
-                this.personList = await allowanceService.getAllPersonWithTypeAndAllowanceReport(this.fromDate, this.toDate, JSON.stringify([]));
+                this.personList = await allowanceService.getAllPersonWithTypeAndAllowanceReport(this.fromDate, this.toDate, JSON.stringify([]), JSON.stringify(this.person.allowanceType));
                 this.dataLength = Number((await allowanceService.getLength())['length'])
                 this.summary = 0
                 this.personList.forEach(e => {
@@ -162,7 +174,7 @@
             async fetchChange() {
                 const from = this.fromDate ? moment(this.fromDate).add(-543, 'years').format('YYYY-MM-DD 00:00:00') : ''
                 const to = this.toDate ? moment(this.toDate).add(-543, 'years').format('YYYY-MM-DD 23:59;59') : ''
-                this.personList = await allowanceService.getAllPersonWithTypeAndAllowanceReport(from, to, JSON.stringify(this.person.type));
+                this.personList = await allowanceService.getAllPersonWithTypeAndAllowanceReport(from, to, JSON.stringify(this.person.type), JSON.stringify(this.person.allowanceType));
                 this.summary = 0
                 this.personList.forEach(e => {
                     this.summary += Number(e.allowance_money)

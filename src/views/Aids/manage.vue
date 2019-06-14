@@ -4,6 +4,16 @@
       <el-col :span="12" class="align-l">
         <h3><b>จัดการข้อมูลผู้ป่วยโรคเอดส์</b></h3>
       </el-col>
+      <el-col :span="12" class="align-r">
+        <h3>จำนวนผู้ป่วยทั้งหมด <b>{{ dataLength }}</b> คน</h3>
+      </el-col>
+    </el-row>
+    <el-row style="margin: 10px;">
+      <el-col :span="24" class="align-r">
+        <el-button type="primary" plain @click="aidsReport">
+            ออกรายงาน
+        </el-button>
+      </el-col>
     </el-row>
     <el-row class="search-bar-margin">
       <el-col :span="12">
@@ -13,7 +23,7 @@
         <el-button  @click="serachingData" style="margin-left: 5px;" type="primary" icon="el-icon-search">ค้นหา</el-button>
       </el-col>
     </el-row>
-    <el-row>
+    <el-row id="PrintTable">
       <el-table
         :data="aidsList"
         style="width: 100%"
@@ -131,6 +141,19 @@
             this.dataLength = Number((await aidService.getLength())['length'])
         },
         methods: {
+            async aidsReport () {
+                const tmp = this.aidsList
+				this.aidsList = await aidService.getAllAids(0, 'all', '');
+				setTimeout(() => {
+					const printcontent = document.getElementById('PrintTable')
+					const new_window = window.open()
+					new_window.document.write(printcontent.outerHTML)
+					new_window.print()
+					new_window.close()
+	
+					this.aidsList = tmp
+				}, 300)
+            },
             onPageChange(page) {
                 this.currentPage = page - 1;
                 this.fetchChange();

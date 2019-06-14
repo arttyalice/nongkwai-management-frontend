@@ -5,6 +5,16 @@
         <h3><b>จัดการข้อมูลประชากร</b></h3>
       </el-col>
       <el-col :span="12" class="align-r">
+        <h3>จำนวนประชากร <b>{{ dataLength }}</b> คน</h3>
+      </el-col>
+    </el-row>
+    <el-row style="margin: 10px;">
+      <el-col :span="12" class="align-l">
+        <el-button type="primary" plain @click="personReport">
+            ออกรายงาน
+        </el-button>
+      </el-col>
+      <el-col :span="12" class="align-r">
           <router-link to="/person/insert">
             <el-button type="primary" plain @click="dialogVisible = true">
                 เพิ่มข้อมูลประชากร
@@ -20,7 +30,7 @@
         <el-button @click="serachingData" style="margin-left: 5px;" type="primary" icon="el-icon-search">ค้นหา</el-button>
       </el-col>
     </el-row>
-    <el-row>
+    <el-row id="PrintTable">
       <el-table
         :data="personList"
         style="width: 100%"
@@ -141,6 +151,19 @@
             this.dataLength = Number((await personService.getLength())['length'])
         },
         methods: {
+            async personReport () {
+              const tmp = this.personList
+              this.personList = await personService.getAllPerson(0, 'all', '');
+              setTimeout(() => {
+                const printcontent = document.getElementById('PrintTable')
+                const new_window = window.open()
+                new_window.document.write(printcontent.outerHTML)
+                new_window.print()
+                new_window.close()
+  
+                this.personList = tmp
+              }, 300)
+            },
             numberIDcard(idcard) {
                   return idcard = idcard.replace( /(\d{1})(\d{4})(\d{5})(\d{1})(\d{2})/, '$1' + '-' + '$2' + '-' + '$3' + '-' + '$4' + '-' + '$5')
             },
